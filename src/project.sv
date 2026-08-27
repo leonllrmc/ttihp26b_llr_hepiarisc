@@ -267,7 +267,7 @@ wire rst_n = rst_n_ext;
   assign DEBUG_OUT = {SPI_SEND_DATA_PULSE, reg_rgb};//dbg_state};//{CLK, rst_n, hepiarisc_en, SPI_DONE};
 
   wire SPI_CLK;
-  clock_divider  #( .DIV_N('d1) ) spi_clk_div ( .clk_in(CLK), .clk_out(SPI_CLK), .do_reset(~rst_n), .is_ready() );
+  //clock_divider  #( .DIV_N('d1) ) spi_clk_div ( .clk_in(CLK), .clk_out(SPI_CLK), .do_reset(~rst_n), .is_ready() );
 
 // spi_module 
 // #( .SPI_MASTER (1'b1) )
@@ -287,7 +287,7 @@ wire rst_n = rst_n_ext;
 // .is_ready() );
 
    spi_master #(
-    .CLK_DIV(2),   // SCLK = clk / (2*CLK_DIV)
+    .CLK_DIV(1)   // SCLK = clk / (2*CLK_DIV)
    ) spiMaster (
      .clk(CLK),
      .rst_n(rst_n),   // async, active-low
