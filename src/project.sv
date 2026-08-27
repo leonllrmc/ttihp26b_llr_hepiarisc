@@ -22,7 +22,8 @@ module tt_um_llr_hepiarisc (
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, 1'b0};
+  wire _unused = &{uio_in[7:2],ena, 1'b0};
+  assign uo_out[7:6] = 2'h0;
 
   wire project_led_red;
   wire project_led_blue;
@@ -147,7 +148,7 @@ wire rst_n = rst_n_ext;
     .extmem_wr(hepiarisc_instruction_memop_wr),
     .extmem_rd(hepiarisc_instruction_memop_rd)
   );
-
+assign hepiarisc_memop_input = 8'h00;
   exec_state currentState;
 
   wire [15:0] flash_addr = {7'h00, hepiarisc_addr, 1'b0};
@@ -303,5 +304,9 @@ wire rst_n = rst_n_ext;
     .done(SPI_DONE_PULSE),
     .busy(SPI_BUSY)
 );
+
+assign led_green = reg_rgb[0];
+assign led_blue = reg_rgb[1];
+assign led_red = reg_rgb[2];
 
 endmodule
