@@ -260,9 +260,7 @@ assign hepiarisc_memop_input = 8'h00;
                 hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[5:0]];
               end
             end
-          end
         end
-
 
 
         default: currentState = STATE_SPI_RD;
