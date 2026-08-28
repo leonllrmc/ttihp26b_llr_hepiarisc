@@ -169,9 +169,9 @@ wire rst_n = rst_n_ext;
 
       extflash_spi_cs <= 1'b1;
 
-      for (ram_idx = 0; ram_idx < 64; ram_idx = ram_idx + 1) begin
-        RAM_data[ram_idx] <= 8'h00;
-      end
+      //for (ram_idx = 0; ram_idx < 64; ram_idx = ram_idx + 1) begin
+      //  RAM_data[ram_idx] <= 8'h00;
+      //end
     end else begin
     case (currentState)
         STATE_SPI_RD: begin
