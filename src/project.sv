@@ -154,6 +154,9 @@ assign hepiarisc_memop_input = 8'h00;
   wire [15:0] flash_addr = {7'h00, hepiarisc_addr, 1'b0};
 
 
+// 64 bytes of ram for now
+  reg [7:0] RAM_data [63:0];
+
   reg [2:0] reg_rgb;
 
   always_ff @(posedge CLK or negedge rst_n) begin
@@ -241,11 +244,20 @@ assign hepiarisc_memop_input = 8'h00;
           hepiarisc_en <= 1'b0;
           currentState <= STATE_SPI_RD;
 
-          // TODO: add ram and peripherals
-          if(hepiarisc_instruction_memop) begin
             if(hepiarisc_instruction_memop_wr) begin
+              if(hepiarisc_memop_address < 64) begin
+                RAM_data[hepiarisc_memop_address[5:0]] <= hepiarisc_memop_output;
+              end else begin
               if(hepiarisc_memop_address == 8'h17) begin
                 reg_rgb[2:0] <= hepiarisc_memop_output[2:0];
+              end
+              end
+            end
+            
+
+            if(hepiarisc_instruction_memop_rd) begin
+              if(hepiarisc_memop_address < 64) begin
+                hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[5:0]];
               end
             end
           end
