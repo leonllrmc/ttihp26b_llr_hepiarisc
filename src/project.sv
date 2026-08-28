@@ -148,7 +148,6 @@ wire rst_n = rst_n_ext;
     .extmem_wr(hepiarisc_instruction_memop_wr),
     .extmem_rd(hepiarisc_instruction_memop_rd)
   );
-assign hepiarisc_memop_input = 8'h00;
   exec_state currentState;
 
   wire [15:0] flash_addr = {7'h00, hepiarisc_addr, 1'b0};
@@ -156,6 +155,8 @@ assign hepiarisc_memop_input = 8'h00;
 
 // 64 bytes of ram for now
   reg [7:0] RAM_data [63:0];
+  integer ram_idx;
+
 
   reg [2:0] reg_rgb;
 
@@ -167,6 +168,10 @@ assign hepiarisc_memop_input = 8'h00;
       reg_rgb <= 3'b000;
 
       extflash_spi_cs <= 1'b1;
+
+      for (ram_idx = 0; ram_idx < 64; ram_idx = ram_idx + 1) begin
+        RAM_data[ram_idx] <= 8'h00;
+      end
     end else begin
     case (currentState)
         STATE_SPI_RD: begin
