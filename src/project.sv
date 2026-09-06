@@ -253,7 +253,7 @@ wire rst_n = rst_n_ext;
               if(hepiarisc_memop_address < 64) begin
                 RAM_data[hepiarisc_memop_address[4:0]] <= hepiarisc_memop_output;
               end else begin
-              if(hepiarisc_memop_address == 8'h17) begin
+              if(hepiarisc_memop_address == 8'h87) begin // was 8'h17
                 reg_rgb[2:0] <= hepiarisc_memop_output[3:0];
               end
               end

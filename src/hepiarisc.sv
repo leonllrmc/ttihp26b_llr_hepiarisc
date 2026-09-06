@@ -126,6 +126,11 @@ always_ff @(posedge CLK or negedge rst_n) begin
             alu_flag_carry <= flag_carry;
             alu_flag_zero <= flag_zero;
             alu_flag_negative <= flag_negative;
+        end else if(is_bir_inst && enable) begin
+            alu_flag_flag_overflow <= irq_latched_flag_overflow;
+            alu_flag_flag_carry <= irq_latched_flag_carry;
+            alu_flag_flag_zero <= irq_latched_flag_zero;
+            alu_flag_flag_negative <= irq_latched_flag_negative;
         end
     end
 end
