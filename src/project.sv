@@ -154,7 +154,7 @@ wire rst_n = rst_n_ext;
 
 
 // 64 bytes of ram for now
-  reg [7:0] RAM_data [63:0];
+  reg [7:0] RAM_data [47:0];
   integer ram_idx;
 
 
@@ -250,7 +250,7 @@ wire rst_n = rst_n_ext;
           currentState <= STATE_SPI_RD;
 
             if(hepiarisc_instruction_memop_wr) begin
-              if(hepiarisc_memop_address < 64) begin
+              if(hepiarisc_memop_address < 48) begin
                 RAM_data[hepiarisc_memop_address[5:0]] <= hepiarisc_memop_output;
               end else begin
               if(hepiarisc_memop_address == 8'h87) begin // was 8'h17
@@ -261,7 +261,7 @@ wire rst_n = rst_n_ext;
             
 
             if(hepiarisc_instruction_memop_rd) begin
-              if(hepiarisc_memop_address < 64) begin
+              if(hepiarisc_memop_address < 48) begin
                 hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[5:0]];
               end
             end
