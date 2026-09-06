@@ -251,10 +251,10 @@ wire rst_n = rst_n_ext;
 
             if(hepiarisc_instruction_memop_wr) begin
               if(hepiarisc_memop_address < 64) begin
-                RAM_data[hepiarisc_memop_address[4:0]] <= hepiarisc_memop_output;
+                RAM_data[hepiarisc_memop_address[5:0]] <= hepiarisc_memop_output;
               end else begin
               if(hepiarisc_memop_address == 8'h87) begin // was 8'h17
-                reg_rgb[2:0] <= hepiarisc_memop_output[3:0];
+                reg_rgb[2:0] <= hepiarisc_memop_output[2:0];
               end
               end
             end
@@ -262,7 +262,7 @@ wire rst_n = rst_n_ext;
 
             if(hepiarisc_instruction_memop_rd) begin
               if(hepiarisc_memop_address < 64) begin
-                hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[4:0]];
+                hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[5:0]];
               end
             end
         end
