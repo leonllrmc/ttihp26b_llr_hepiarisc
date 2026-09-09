@@ -49,7 +49,7 @@ wire [7:0] bra_pc_inc_value = instruction[7:0];
 wire [3:0] brcond_opcode = instruction[11:8];
 
 wire [5:0] memop_offset_6 = instruction[5:0];
-wire [7:0] memop_offset_8 = {{8{memop_offset_6[5]}}, memop_offset_6};
+wire [7:0] memop_offset_8 = {{2{memop_offset_6[5]}}, memop_offset_6};
 wire [2:0] memop_ptr_reg = instruction[8:6];
 wire [2:0] memop_data_reg = instruction[11:9];
 

@@ -36,11 +36,10 @@ pinout:
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
-
   # Outputs
-  uo[0]: "project_extflash_spi_cs"
+  uo[0]: "project_extflash_spi_sck"
   uo[1]: "project_extflash_spi_mosi"
-  uo[2]: "project_extflash_spi_sck"
+  uo[2]: "project_extflash_spi_cs"
   uo[3]: "project_led_red"
   uo[4]: "project_led_green"
   uo[5]: "project_led_blue"

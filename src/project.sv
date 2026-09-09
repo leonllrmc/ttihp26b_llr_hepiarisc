@@ -23,7 +23,7 @@ module tt_um_llr_hepiarisc (
   assign uio_oe[3:0]  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, 1'b0};
+  wire _unused = &{ena, 1'b0, ui_in[3:2]};
 
   wire project_led_red;
   wire project_led_blue;
@@ -34,6 +34,7 @@ module tt_um_llr_hepiarisc (
   wire project_extflash_spi_sck;
 
   assign uo_out[2:0] = {project_extflash_spi_cs, project_extflash_spi_mosi, project_extflash_spi_sck};
+  assign uo_out[3] = 1'b0;
 
 
   // reg out => {OUT[7:4]}
@@ -103,7 +104,6 @@ wire rst_n = rst_n_ext;
   assign gpio_uo = GPO_out_reg;
   wire [3:0] GPI_in_reg;
   assign GPI_in_reg = gpio_ui;
-
   reg [3:0] GPIO_out_reg;
   assign gpio_uio_out = GPIO_out_reg;
   reg [3:0] GPIO_oe_reg;
@@ -236,6 +236,12 @@ wire rst_n = rst_n_ext;
       for (ram_idx = 0; ram_idx < 64; ram_idx = ram_idx + 1) begin
         RAM_data[ram_idx] <= 8'h00;
       end
+
+      GPO_out_reg <= 4'h0;
+      GPIO_out_reg <= 4'h0;
+      GPIO_oe_reg <= 4'h0;
+      IRQ_source_en <= 2'h0;
+      systick_divider <= 8'h00;
     end else begin
     case (currentState)
         STATE_SPI_RD: begin
@@ -352,7 +358,7 @@ wire rst_n = rst_n_ext;
         end
 
 
-        default: currentState = STATE_SPI_RD;
+        default: currentState <= STATE_SPI_RD;
     endcase
   end
   end
