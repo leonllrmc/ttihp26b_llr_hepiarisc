@@ -6,7 +6,7 @@ module hepiarisc (
   input [15:0] instruction_in,
   output [7:0] instruction_addr,
 
-  input irq_n,
+  input irq,
 
   input [7:0] extmem_MISO,
   output [7:0] extmem_MOSI,
@@ -184,19 +184,18 @@ reg irq_latched_flag_zero;
 reg irq_latched_flag_negative;
 
 reg [7:0] next_PC;
-reg irq_sig;
+wire irq_sig = irq;
 
-reg old_irq_n;
 
-always_ff @(posedge CLK or negedge rst_n) begin
-    if(~rst_n) begin
-        old_irq_n <= 1'b0;
-        irq_sig <= 1'b0;
-    end else begin
-        irq_sig <= ~irq_n && old_irq_n;;
-        old_irq_n <= irq_n;
-    end
-end
+//always_ff @(posedge CLK or negedge rst_n) begin
+//    if(~rst_n) begin
+//        old_irq_n <= 1'b0;
+//        irq_sig <= 1'b0;
+//    end else begin
+//        irq_sig <= ~irq_n && old_irq_n;;
+//        old_irq_n <= irq_n;
+//    end
+//end
 
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin

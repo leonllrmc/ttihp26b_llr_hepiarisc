@@ -5,6 +5,7 @@
 
 `default_nettype none
 
+
 module tt_um_llr_hepiarisc (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -18,12 +19,11 @@ module tt_um_llr_hepiarisc (
 
   // All output pins must be assigned. If not used, assign to 0.
   //assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+  assign uio_out[3:0] = 0;
+  assign uio_oe[3:0]  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{uio_in[7:2],ena, 1'b0};
-  assign uo_out[7:6] = 2'h0;
+  wire _unused = &{ena, 1'b0};
 
   wire project_led_red;
   wire project_led_blue;
@@ -33,9 +33,14 @@ module tt_um_llr_hepiarisc (
   wire project_extflash_spi_miso;
   wire project_extflash_spi_sck;
 
-  assign uo_out[5:0] = {project_extflash_spi_cs, project_extflash_spi_mosi, project_extflash_spi_sck, 
-                      project_led_red, project_led_blue, project_led_green};
-    
+  assign uo_out[2:0] = {project_extflash_spi_cs, project_extflash_spi_mosi, project_extflash_spi_sck};
+
+
+  // reg out => {OUT[7:4]}
+  // reg in => {IN[7:4]}
+  // reg EN => {IO_OUT_EN[7:4]}
+  // reg IO out => {IO_OUT[7:4]}
+  // reg IO in => {IO_IN[7:4]}
 
 
   hepiarisc_top hepiariscTop (
@@ -49,7 +54,14 @@ module tt_um_llr_hepiarisc (
   .extflash_spi_miso(ui_in[0]),
   .extflash_spi_sck(project_extflash_spi_sck),
 
-  .irq_n(ui_in[1]),
+  .gpio_uo(uo_out[7:4]),
+  .gpio_ui(ui_in[7:4]),
+  .gpio_uio_in(uio_in[7:4]),
+  .gpio_uio_out(uio_out[7:4]),
+  .gpio_uio_oe(uio_oe[7:4]),
+
+
+  .irq_ext(ui_in[1]),
 
   .DEBUG_OUT() // TODO: add proper debug interface (maybe use the SPI fetch cycles to transmit data)
   // 6*8*3 = 18 bytes/cycle = 8 regs + 1 addr + 1 data + 2 curren topcode= 6 left
@@ -74,12 +86,73 @@ module hepiarisc_top (
   input wire extflash_spi_miso,
   output wire extflash_spi_sck,
 
-  input wire irq_n,
+  output wire [3:0] gpio_uo,
+  input wire [3:0] gpio_ui,
+  input wire [3:0] gpio_uio_in,
+  output wire [3:0] gpio_uio_out,
+  output wire [3:0] gpio_uio_oe,
+
+
+  input wire irq_ext,
 
   output wire [3:0] DEBUG_OUT
 );
 wire rst_n = rst_n_ext;
 
+  reg [3:0] GPO_out_reg;
+  assign gpio_uo = GPO_out_reg;
+  wire [3:0] GPI_in_reg;
+  assign GPI_in_reg = gpio_ui;
+
+  reg [3:0] GPIO_out_reg;
+  assign gpio_uio_out = GPIO_out_reg;
+  reg [3:0] GPIO_oe_reg;
+  assign gpio_uio_oe = GPIO_oe_reg;
+  wire [3:0] GPIO_in_reg;
+  assign GPIO_in_reg = gpio_uio_in;
+
+  
+  reg hepiarisc_en;
+  wire systick_irq;
+  reg [1:0] IRQ_source_en; // IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+  reg [7:0] systick_divider;
+  reg systick_reg_reload;
+
+  systick_gen #(
+   .min_div(8)
+  ) systick_module (
+      .clk(CLK),
+      .rst_n(rst_n && ~systick_reg_reload),
+      .divider(systick_divider),
+      .en(hepiarisc_en), // clocks during cpu execution
+      .irq_pulse(systick_irq)
+   );
+
+  reg irq_ext_old;
+  reg irq_ext_buf;
+  reg irq_ext_pulse;
+  always_ff @(posedge CLK or negedge rst_n) begin
+    if(~rst_n) begin
+      irq_ext_old <= 1'b0;
+      irq_ext_pulse <= 1'b0;
+      irq_ext_buf <= 1'b0;
+    end else begin
+      irq_ext_buf <= irq_ext;
+      irq_ext_old <= irq_ext_buf;
+      irq_ext_pulse <= irq_ext_buf && ~irq_ext_old;
+    end
+  end
+
+  reg hepiarisc_irq;
+  always_comb begin
+    case(IRQ_source_en)
+      2'b00: hepiarisc_irq = 1'b0;
+      2'b01: hepiarisc_irq = irq_ext_pulse;
+      2'b10: hepiarisc_irq = systick_irq;
+      2'b11: hepiarisc_irq = irq_ext_pulse || systick_irq;
+    endcase
+  end
+    
 
   wire SPI_BUSY;
   wire SPI_DONE = ~SPI_BUSY;
@@ -111,17 +184,6 @@ wire rst_n = rst_n_ext;
   end
 
 
-  //always_ff @(posedge CLK or negedge rst_n) begin
-  //  if(~rst_n) begin
-  //    SPI_DONE_PULSE <= 1'b0;
-  //    //SPI_DONE_OLD <= 1'b0;
-  //  end else begin
-  //    SPI_DONE_PULSE <= ~SPI_DONE_OLD && SPI_DONE;
-  //    SPI_DONE_OLD <= SPI_DONE;
-  //  end
-  //end
-
-  reg hepiarisc_en;
   wire hepiarisc_instruction_memop_rd;
   wire hepiarisc_instruction_memop_wr;
   wire hepiarisc_instruction_memop = hepiarisc_instruction_memop_rd || hepiarisc_instruction_memop_wr;
@@ -140,7 +202,7 @@ wire rst_n = rst_n_ext;
     .instruction_in(hepiarisc_instruction),
     .instruction_addr(hepiarisc_addr),
 
-    .irq_n(irq_n),
+    .irq(hepiarisc_irq),
 
     .extmem_MISO(hepiarisc_memop_input),
     .extmem_MOSI(hepiarisc_memop_output),
@@ -152,6 +214,8 @@ wire rst_n = rst_n_ext;
 
   wire [15:0] flash_addr = {7'h00, hepiarisc_addr, 1'b0};
 
+  // counter peripheral => when divider updated => reset counter
+  // could tie rst_n to reg being written maybe (?)
 
 // 64 bytes of ram for now
   reg [7:0] RAM_data [31:0];
@@ -245,7 +309,10 @@ wire rst_n = rst_n_ext;
           extflash_spi_cs <= 1'b1;
         end
 
+
+
         STATE_MEMOP: begin
+          systick_reg_reload <= hepiarisc_instruction_memop_wr && (hepiarisc_memop_address[7:1] == 7'b1000100);
           hepiarisc_en <= 1'b0;
           currentState <= STATE_SPI_RD;
 
@@ -253,16 +320,33 @@ wire rst_n = rst_n_ext;
               if(hepiarisc_memop_address < 32) begin
                 RAM_data[hepiarisc_memop_address[4:0]] <= hepiarisc_memop_output;
               end else begin
-              if(hepiarisc_memop_address == 8'h87) begin // was 8'h17
-                reg_rgb[2:0] <= hepiarisc_memop_output[2:0];
+                case(hepiarisc_memop_address)
+                  8'h80: GPO_out_reg <= hepiarisc_memop_output[3:0];
+                  // 8'h81: hepiarisc_memop_input <= {4'h0, GPI_in_reg}; -> undefined
+                  8'h82: GPIO_out_reg <= hepiarisc_memop_output[3:0];
+                  8'h83: GPIO_oe_reg <= hepiarisc_memop_output[3:0];
+                  // 8'h84: GPIO_in_reg <= hepiarisc_memop_output[3:0]; -> undefined
+                  8'h87: reg_rgb[2:0] <= hepiarisc_memop_output[2:0];
+                  // systick
+                  8'h88: IRQ_source_en <= hepiarisc_memop_output[1:0];// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+                  8'h89: systick_divider <= hepiarisc_memop_output;
+                endcase
               end
-              end
-            end
-            
-
-            if(hepiarisc_instruction_memop_rd) begin
+            end else if(hepiarisc_instruction_memop_rd) begin
               if(hepiarisc_memop_address < 32) begin
                 hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[4:0]];
+              end else begin
+                case(hepiarisc_memop_address)
+                  8'h80: hepiarisc_memop_input <= {4'h0, GPO_out_reg};
+                  8'h81: hepiarisc_memop_input <= {4'h0, GPI_in_reg};
+                  8'h82: hepiarisc_memop_input <= {4'h0, GPIO_out_reg};
+                  8'h83: hepiarisc_memop_input <= {4'h0, GPIO_oe_reg};
+                  8'h84: hepiarisc_memop_input <= {4'h0, GPIO_in_reg};
+                  8'h87: hepiarisc_memop_input <= {5'h00, reg_rgb[2:0]};
+                  // systick
+                  8'h88: hepiarisc_memop_input <= {6'h00, IRQ_source_en};// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+                  8'h89: hepiarisc_memop_input <= systick_divider;
+                endcase
               end
             end
         end
