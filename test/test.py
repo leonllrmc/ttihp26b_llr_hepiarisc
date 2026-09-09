@@ -96,9 +96,9 @@ async def spi_flash_emulator(dut, rom_data, cs_idx=0, sclk_idx=1, mosi_idx=2, mi
             if state == "DATA":
                 if bit_count_tx % 8 == 0:
                     # Fetch next byte from ROM data
-                    if addr < len(rom_data):
+                    if addr < len(rom_data["content"]):
                         #print(f"Loading from addr 0x{addr:06X}")
-                        shift_reg_tx = rom_data[addr]
+                        shift_reg_tx = rom_data["content"][addr]
                         #print(f"instruction byte: 0x{shift_reg_tx:02X}")
                     else:
                         shift_reg_tx = 0x00 # Out of bounds returns zero
@@ -164,6 +164,8 @@ async def test_hepiarisc_cpu(dut):
     clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
+    rom_bytes = {"content": 0}
+
     # 2. Define the program (32-bit RISC-V machine code)
     # This will be converted to bytes and served by the SPI emulator.
     dummy_program_words = [
@@ -173,7 +175,7 @@ async def test_hepiarisc_cpu(dut):
         0x28C0,  #R4 = R3 << 1       ; R4 = 4
         0xB000 # B 0
     ]
-    rom_bytes = ins_array_to_bytearray(dummy_program_words)
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
 
     # 3. Start the SPI Flash Emulator concurrently
     # ---> UPDATE THESE INDICES to match your project's info.yaml pin mapping <---
@@ -186,41 +188,112 @@ async def test_hepiarisc_cpu(dut):
         miso_idx = 0   # e.g., ui_in[0]
     ))
 
-    # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
-    await reset_cpu(dut)
 
-    # 5. Let the CPU run and monitor state
-    dut._log.info("Starting execution loop...")
-    
-    max_cycles = 500  # Give it enough cycles to perform SPI transactions
-    for cycle in range(max_cycles):
-        await RisingEdge(dut.clk)
+    async def run_test_simple_ALU():
+        print("Starting simple ALU program test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
         
-        uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
-
-        current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
-        # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
-        # ---> UPDATE THIS PATH to match your actual internal module names <---
-        try:
-            #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
-            pc_val = dut.user_project.hepiariscTop.cpu.PC.value
-            #pc_val = "Not Mapped"
-        except AttributeError:
-            pc_val = "Path Error"
-
-        if dut.user_project.hepiariscTop.hepiarisc_en.value:
-            dut._log.info(f"Cycle {cycle:04d} | PC: {pc_val} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
-            for i in range(8):
-                print(f"R{i} : {dut.user_project.hepiariscTop.cpu.regbank.registers[i].value}")
+        max_cycles = 600  # Give it enough cycles to perform SPI transactions
+        for cycle in range(max_cycles):
+            await RisingEdge(dut.clk)
             
-        # Optional: Break condition
-        # If your RISC-V program writes 0xFF to specific output pins when finished
-        # if (uo_out_val & 0xF0) == 0xF0:  
-        #     dut._log.info("Program signaled completion.")
-        #     break
-    assert(dut.user_project.hepiariscTop.cpu.regbank.registers[1].value == 0xFF)
-    assert(dut.user_project.hepiariscTop.cpu.regbank.registers[2].value == 1)
-    assert(dut.user_project.hepiariscTop.cpu.regbank.registers[3].value == 2)
-    assert(dut.user_project.hepiariscTop.cpu.regbank.registers[4].value == 4)
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
 
-    dut._log.info("Simulation finished.")
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                dut._log.info(f"Cycle {cycle:04d} | PC: {pc_val} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                reg_log_str = ""
+                for i in range(8):
+                    reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                dut._log.info(reg_log_str)
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[1].value == 0xFF)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[2].value == 1)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[3].value == 2)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[4].value == 4)
+
+        dut._log.info("simple ALU test finished")
+
+    await run_test_simple_ALU()
+
+    dummy_program_words = [
+        0x7240,  #R1 = not R1        ; R1 = 0xFF
+        0x9117, # jump to bank 1 0x17
+        0x8038,   #R0 = 0x38
+        0xB000, # B 0, (infloop)
+        *[0x0000] * (256-4), # fill
+        0x8442, # R2 = 0x42 (fake => if fall on this, PC addr not set properly @ bank jump)  
+        0xF002, # false path return bank switch
+        *[0x0000] * (0x17-2), # fill
+        0x8417, # R2 = 0x17 (true path)
+        0xF002, # true path return bank switch
+    ]
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
+
+    print(list(zip(dummy_program_words, range(0, 512))))
+
+    async def run_test_simple_bank_switch():
+        print("Starting simple bank switch test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
+        
+        max_cycles = 800  # Give it enough cycles to perform SPI transactions
+        for cycle in range(max_cycles):
+            await RisingEdge(dut.clk)
+            
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
+
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                dut._log.info(f"Cycle {cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                dut._log.info(f"return bank: {dut.user_project.hepiariscTop.cpu.returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.bankJumpReturnAddr.value)}")
+                reg_log_str = ""
+                for i in range(8):
+                    reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                dut._log.info(reg_log_str)
+                dut._log.info("")
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[1].value == 0xFF)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[0].value == 0x38)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[2].value == 0x17)
+
+        dut._log.info("simple bank switch test finished")
+
+    await run_test_simple_bank_switch()

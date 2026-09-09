@@ -194,6 +194,8 @@ wire rst_n = rst_n_ext;
   
   reg [15:0] hepiarisc_instruction;
 
+  reg [3:0] hepiarisc_addr_bank;
+
   hepiarisc cpu(
     .CLK(CLK),
     .rst_n(rst_n),
@@ -208,11 +210,14 @@ wire rst_n = rst_n_ext;
     .extmem_MOSI(hepiarisc_memop_output),
     .extmem_addr(hepiarisc_memop_address),
     .extmem_wr(hepiarisc_instruction_memop_wr),
-    .extmem_rd(hepiarisc_instruction_memop_rd)
+    .extmem_rd(hepiarisc_instruction_memop_rd),
+
+    
+    .instruction_addr_bank(hepiarisc_addr_bank)
   );
   exec_state currentState;
 
-  wire [15:0] flash_addr = {7'h00, hepiarisc_addr, 1'b0};
+  wire [15:0] flash_addr = {3'h00, hepiarisc_addr_bank, hepiarisc_addr, 1'b0};
 
   // counter peripheral => when divider updated => reset counter
   // could tie rst_n to reg being written maybe (?)

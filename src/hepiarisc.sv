@@ -12,7 +12,9 @@ module hepiarisc (
   output [7:0] extmem_MOSI,
   output [7:0] extmem_addr,
   output extmem_wr,
-  output extmem_rd
+  output extmem_rd,
+
+  output [3:0] instruction_addr_bank
 );
 
 wire [7:0] ALU_result;
@@ -21,6 +23,11 @@ wire [7:0] ALU_result;
 reg [7:0] PC;
 assign instruction_addr = PC;
 
+reg [3:0] currentBank;
+reg [3:0] returnBank;
+reg [7:0] bankJumpReturnAddr;
+
+assign instruction_addr_bank = currentBank;
 
 wire [15:0] instruction = instruction_in;
 
@@ -31,11 +38,16 @@ wire is_ldconst_inst = instruction[15:12] == 4'h8;
 wire is_bra_inst = instruction[15:12] == 4'hB;
 wire is_brcond_inst = instruction[15:12] == 4'hA;
 wire is_bl_inst = instruction[15:12] == 4'hE; // branch link (jsr)
-wire is_br_inst = (instruction[15:12] == 4'hF) && ~instruction[0]; // branch return (rts)
+wire is_br_inst = (instruction[15:12] == 4'hF) && (instruction[1:0] == 2'b00); // branch return (rts)
 wire is_bir_inst = (instruction[15:12] == 4'hF) && instruction[0]; // irq return (rti)
+wire is_bar_inst = (instruction[15:12] == 4'hF) && (instruction[1:0] == 2'b10); // bank return
 wire is_ldmem_inst = instruction[15:12] == 4'hC;
 wire is_stmem_inst = instruction[15:12] == 4'hD;
 wire is_mem_inst = is_ldmem_inst || is_stmem_inst;
+
+wire is_bankjmp_inst = instruction[15:12] == 4'h9;
+wire [7:0] bank_jump_dest_addr = instruction[7:0];
+wire [3:0] bank_jump_dest_bank = instruction[11:8];
 
 wire [2:0] ALU_OP = instruction[14:12];
 wire [2:0] alu_ins_reg_b_addr = instruction[5:3];
@@ -219,6 +231,24 @@ end
 
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
+        currentBank <= 4'h0;
+        returnBank <= 4'h0;
+        bankJumpReturnAddr <= 8'h00;
+    end else begin
+        if(enable) begin
+            if(is_bankjmp_inst) begin
+                returnBank <= currentBank;
+                currentBank <= bank_jump_dest_bank;
+                bankJumpReturnAddr <= next_PC;
+            end else if(is_bar_inst) begin
+                currentBank <= returnBank;
+            end
+        end
+    end
+end
+
+always_ff @(posedge CLK or negedge rst_n) begin
+    if(~rst_n) begin
         PC <= 8'h00;
     end else begin
         if(enable) begin
@@ -234,6 +264,10 @@ always_ff @(posedge CLK or negedge rst_n) begin
                 PC <= IRQ_latched_PC;
             end else if(irq_sig) begin
                 PC <= 8'h01;
+            end else if(is_bankjmp_inst) begin
+                PC <= bank_jump_dest_addr;
+            end else if(is_bar_inst) begin
+                PC <= bankJumpReturnAddr;
             end else begin
                 PC <= PC + 1;
             end
