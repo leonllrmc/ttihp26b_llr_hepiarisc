@@ -223,7 +223,7 @@ wire rst_n = rst_n_ext;
   // could tie rst_n to reg being written maybe (?)
 
 // 64 bytes of ram for now
-  reg [7:0] RAM_data [127:0];
+  reg [7:0] RAM_data [63:0];
   integer ram_idx;
 
 
@@ -328,8 +328,8 @@ wire rst_n = rst_n_ext;
           currentState <= STATE_SPI_RD;
 
             if(hepiarisc_instruction_memop_wr) begin
-              if(hepiarisc_memop_address < 128) begin
-                RAM_data[hepiarisc_memop_address[6:0]] <= hepiarisc_memop_output;
+              if(hepiarisc_memop_address < 64) begin
+                RAM_data[hepiarisc_memop_address[5:0]] <= hepiarisc_memop_output;
               end else begin
                 case(hepiarisc_memop_address)
                   8'h80: GPO_out_reg <= hepiarisc_memop_output[3:0];
@@ -343,29 +343,31 @@ wire rst_n = rst_n_ext;
                   8'h89: systick_divider <= hepiarisc_memop_output;
                 endcase
               end
-            end else if(hepiarisc_instruction_memop_rd) begin
-              if(hepiarisc_memop_address < 128) begin
-                hepiarisc_memop_input <= RAM_data[hepiarisc_memop_address[6:0]];
-              end else begin
-                case(hepiarisc_memop_address)
-                  8'h80: hepiarisc_memop_input <= {4'h0, GPO_out_reg};
-                  8'h81: hepiarisc_memop_input <= {4'h0, GPI_in_reg};
-                  8'h82: hepiarisc_memop_input <= {4'h0, GPIO_out_reg};
-                  8'h83: hepiarisc_memop_input <= {4'h0, GPIO_oe_reg};
-                  8'h84: hepiarisc_memop_input <= {4'h0, GPIO_in_reg};
-                  8'h87: hepiarisc_memop_input <= {5'h00, reg_rgb[2:0]};
-                  // systick
-                  8'h88: hepiarisc_memop_input <= {6'h00, IRQ_source_en};// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
-                  8'h89: hepiarisc_memop_input <= systick_divider;
-                endcase
-              end
             end
         end
-
-
         default: currentState <= STATE_SPI_RD;
     endcase
   end
+  end
+
+  always_comb begin
+    if(hepiarisc_instruction_memop_rd) begin
+      if(hepiarisc_memop_address < 64) begin
+        hepiarisc_memop_input = RAM_data[hepiarisc_memop_address[5:0]];
+      end else begin
+        case(hepiarisc_memop_address)
+          8'h80: hepiarisc_memop_input = {4'h0, GPO_out_reg};
+          8'h81: hepiarisc_memop_input = {4'h0, GPI_in_reg};
+          8'h82: hepiarisc_memop_input = {4'h0, GPIO_out_reg};
+          8'h83: hepiarisc_memop_input = {4'h0, GPIO_oe_reg};
+          8'h84: hepiarisc_memop_input = {4'h0, GPIO_in_reg};
+          8'h87: hepiarisc_memop_input = {5'h00, reg_rgb[2:0]};
+          // systick
+          8'h88: hepiarisc_memop_input = {6'h00, IRQ_source_en};// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+          8'h89: hepiarisc_memop_input = systick_divider;
+        endcase
+      end
+    end
   end
 
   wire [2:0] dbg_state = (currentState == STATE_SPI_RD) ? 3'h1 : 

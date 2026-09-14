@@ -1,22 +1,22 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Wed Sep  9 14:12:36 2026
+[*] Mon Sep 14 13:49:54 2026
 [*]
 [dumpfile] "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/tb.fst"
-[dumpfile_mtime] "Wed Sep  9 14:08:32 2026"
-[dumpfile_size] 3244
+[dumpfile_mtime] "Mon Sep 14 13:45:01 2026"
+[dumpfile_size] 6495
 [savefile] "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/tb.gtkw"
-[timestart] 0
-[size] 1376 600
-[pos] -77 -234
-*-17.930470 463000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 43500000
+[size] 1920 986
+[pos] 720 -1409
+*-21.060863 47780000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [treeopen] tb.user_project.
 [treeopen] tb.user_project.hepiariscTop.
 [sst_width] 297
 [signals_width] 230
 [sst_expanded] 1
-[sst_vpaned_height] 158
+[sst_vpaned_height] 293
 @28
 tb.user_project.ena
 tb.user_project.clk
@@ -45,5 +45,16 @@ tb.user_project.uio_out[7:0]
 @22
 tb.user_project.uo_out[7:0]
 tb.uo_out[7:0]
+@200
+-
+@22
+tb.user_project.hepiariscTop.cpu.extmem_addr[7:0]
+@28
+tb.user_project.hepiariscTop.cpu.extmem_rd
+tb.user_project.hepiariscTop.cpu.extmem_wr
+@22
+tb.user_project.hepiariscTop.cpu.extmem_MISO[7:0]
+@23
+tb.user_project.hepiariscTop.cpu.extmem_MOSI[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

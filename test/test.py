@@ -248,7 +248,7 @@ async def test_hepiarisc_cpu(dut):
     ]
     rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
 
-    print(list(zip(dummy_program_words, range(0, 512))))
+    #print(list(zip(dummy_program_words, range(0, 512))))
 
     async def run_test_simple_bank_switch():
         print("Starting simple bank switch test")
@@ -297,3 +297,98 @@ async def test_hepiarisc_cpu(dut):
         dut._log.info("simple bank switch test finished")
 
     await run_test_simple_bank_switch()
+
+    """
+    ldconst r1, 1
+    ldconst r2, 2
+    ldconst r3, 3
+
+    ldconst r4, 0x11
+    st r1, (r4+0x06)
+    ldconst r4, 0x35
+    st r2, (r4+0x03)
+    ldconst r4, 0x30
+    st r3, (r4+0x0F)
+
+    ldconst r4, 0x11
+    ld r5, (r4+0x06)
+    ldconst r4, 0x35
+    ld r6, (r4+0x03)
+    ldconst r4, 0x30
+    ld r7, (r4+0x0F)
+    """
+    dummy_program_words = [
+	    0xb010, 0xf001, 0x5000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+	    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+	    0x82aa, 0x8417, 0x8638, 0x8811, 0xd306, 0x8835, 0xd503, 0x8830, 
+	    0xd70f, 0x8811, 0xcb06, 0x8835, 0xcd03, 0x8830, 0xcf0f
+    ]
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
+
+    #print(list(zip(dummy_program_words, range(0, 512))))
+
+    async def run_test_simple_RAM():
+        print("Starting simple bank switch test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
+        
+        max_cpu_cycles = 18 # Give it enough cycles to perform SPI transactions
+        current_cpu_cycle = 0
+        while 1:
+            await RisingEdge(dut.clk)
+            
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
+
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
+            
+            try:
+                extmem_MOSI = int(dut.user_project.hepiariscTop.hepiarisc_memop_output.value)
+            except Exception:
+                extmem_MOSI = 0xDE
+
+            try:
+                extmem_MISO = int(dut.user_project.hepiariscTop.hepiarisc_memop_input.value)
+            except Exception:
+                extmem_MISO = 0xAD
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                current_cpu_cycle += 1
+                dut._log.info(f"cpu Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                dut._log.info(f"return bank: {dut.user_project.hepiariscTop.cpu.returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.bankJumpReturnAddr.value)}")
+                dut._log.info(f"extmem MOSI 0x{extmem_MOSI:02X} extmem MISO 0x{extmem_MISO:02X}")
+                reg_log_str = ""
+                for i in range(8):
+                    reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                dut._log.info(reg_log_str)
+                dut._log.info("")
+
+            if current_cpu_cycle >= max_cpu_cycles:
+                await RisingEdge(dut.clk)
+                break
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[5].value == 0xAA)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[6].value == 0x17)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[7].value == 0x38)
+
+        dut._log.info("simple bank switch test finished")
+
+
+    await run_test_simple_RAM()
