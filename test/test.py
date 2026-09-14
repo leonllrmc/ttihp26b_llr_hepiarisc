@@ -214,11 +214,12 @@ async def test_hepiarisc_cpu(dut):
                 pc_val = "Path Error"
 
             if dut.user_project.hepiariscTop.hepiarisc_en.value:
-                dut._log.info(f"Cycle {cycle:04d} | PC: {pc_val} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
-                reg_log_str = ""
-                for i in range(8):
-                    reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
-                dut._log.info(reg_log_str)
+                if False:
+                    dut._log.info(f"Cycle {cycle:04d} | PC: {pc_val} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
                 
             # Optional: Break condition
             # If your RISC-V program writes 0xFF to specific output pins when finished
@@ -277,13 +278,14 @@ async def test_hepiarisc_cpu(dut):
             hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
 
             if dut.user_project.hepiariscTop.hepiarisc_en.value:
-                dut._log.info(f"Cycle {cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
-                dut._log.info(f"return bank: {dut.user_project.hepiariscTop.cpu.returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.bankJumpReturnAddr.value)}")
-                reg_log_str = ""
-                for i in range(8):
-                    reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
-                dut._log.info(reg_log_str)
-                dut._log.info("")
+                if True:
+                    dut._log.info(f"Cycle {cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    dut._log.info(f"return bank: {dut.user_project.hepiariscTop.cpu.dbg_returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.dbg_bankJumpReturnAddr.value)}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
+                    dut._log.info("")
                 
             # Optional: Break condition
             # If your RISC-V program writes 0xFF to specific output pins when finished
@@ -320,8 +322,8 @@ async def test_hepiarisc_cpu(dut):
     dummy_program_words = [
 	    0xb010, 0xf001, 0x5000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 	    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-	    0x82aa, 0x8417, 0x8638, 0x8811, 0xd306, 0x8835, 0xd503, 0x8830, 
-	    0xd70f, 0x8811, 0xcb06, 0x8835, 0xcd03, 0x8830, 0xcf0f
+	    0x82aa, 0x8417, 0x8638, 0x8811, 0xd306, 0x8835, 0xd503, 0x8850, 
+	    0xd70f, 0x8811, 0xcb06, 0x8835, 0xcd03, 0x8850, 0xcf0f
     ]
     rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
 
@@ -366,14 +368,14 @@ async def test_hepiarisc_cpu(dut):
 
             if dut.user_project.hepiariscTop.hepiarisc_en.value:
                 current_cpu_cycle += 1
-                dut._log.info(f"cpu Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
-                dut._log.info(f"return bank: {dut.user_project.hepiariscTop.cpu.returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.bankJumpReturnAddr.value)}")
-                dut._log.info(f"extmem MOSI 0x{extmem_MOSI:02X} extmem MISO 0x{extmem_MISO:02X}")
-                reg_log_str = ""
-                for i in range(8):
-                    reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
-                dut._log.info(reg_log_str)
-                dut._log.info("")
+                if False:
+                    dut._log.info(f"cpu Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    dut._log.info(f"extmem MOSI 0x{extmem_MOSI:02X} extmem MISO 0x{extmem_MISO:02X}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
+                    dut._log.info("")
 
             if current_cpu_cycle >= max_cpu_cycles:
                 await RisingEdge(dut.clk)

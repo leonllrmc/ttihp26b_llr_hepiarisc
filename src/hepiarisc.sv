@@ -24,8 +24,9 @@ reg [7:0] PC;
 assign instruction_addr = PC;
 
 reg [3:0] currentBank;
-reg [3:0] returnBank;
-reg [7:0] bankJumpReturnAddr;
+reg [3:0] returnBank [7:0];
+reg [7:0] bankJumpReturnAddr [7:0];
+reg [2:0] bankjmp_SP;
 
 assign instruction_addr_bank = currentBank;
 
@@ -229,19 +230,29 @@ always_ff @(posedge CLK or negedge rst_n) begin
     end
 end
 
+// MARK: bank jump
+integer i_stack_rst;
+wire [7:0] dbg_bankJumpReturnAddr = bankJumpReturnAddr[bankjmp_SP - 3'd1];
+wire [3:0] dbg_returnBank = bankJumpReturnAddr[bankjmp_SP - 3'd1];
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
+        bankjmp_SP <= 3'h0;
         currentBank <= 4'h0;
-        returnBank <= 4'h0;
-        bankJumpReturnAddr <= 8'h00;
+        for(i_stack_rst = 0; i_stack_rst < 8; i_stack_rst = i_stack_rst + 1) begin   
+            returnBank[i_stack_rst] <= 4'h0;
+            bankJumpReturnAddr[i_stack_rst] <= 8'h00;
+        end
     end else begin
         if(enable) begin
             if(is_bankjmp_inst) begin
-                returnBank <= currentBank;
+                returnBank[bankjmp_SP] <= currentBank;
                 currentBank <= bank_jump_dest_bank;
-                bankJumpReturnAddr <= next_PC;
+                bankJumpReturnAddr[bankjmp_SP] <= next_PC;
+
+                bankjmp_SP <= bankjmp_SP + 3'd1;
             end else if(is_bar_inst) begin
-                currentBank <= returnBank;
+                currentBank <= returnBank[bankjmp_SP - 3'd1];
+                bankjmp_SP <= bankjmp_SP - 3'd1;
             end
         end
     end
@@ -267,7 +278,7 @@ always_ff @(posedge CLK or negedge rst_n) begin
             end else if(is_bankjmp_inst) begin
                 PC <= bank_jump_dest_addr;
             end else if(is_bar_inst) begin
-                PC <= bankJumpReturnAddr;
+                PC <= bankJumpReturnAddr[bankjmp_SP - 3'd1];
             end else begin
                 PC <= PC + 1;
             end
