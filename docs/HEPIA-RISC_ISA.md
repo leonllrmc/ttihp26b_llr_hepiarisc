@@ -236,13 +236,13 @@ Absolute jump: `PC = val`, and simultaneously `RegLink = PC_old + 1` (return add
 
 ### `BR [RegLink]` — branch register (function return)
 ```
-1111  RegLink  --------  0
+1111  RegLink  ------- 00
 ```
 `PC = [RegLink]` — jumps to the address stored in `RegLink` (normally the register previously set by `BL`, e.g. `R7`). Example: `0xFE00` → `BR [R7]`.
 
 ### `BIR` — branch interrupt register (interrupt return)
 ```
-1111  -----------  1
+1111  ---------- 01
 ```
 `PC = [IRL]` — returns from an interrupt service routine using the internal `IRL` register instead of a general-purpose register. Example: `0xF001` → `BIR`.
 
@@ -381,3 +381,32 @@ BIR                                    ; interrupt return: PC = [IRL]
 5  0xDC01  ST R6, 1[R0]       ; High LEDs = R6
 6  0xB000  B 0                ; loop forever
 ```
+
+## ISA expension
+A small hardware stack of 5 items is being added for the new bank branch instruction (the SP is invisible)
+
+NOTE: the SP is not protected by hardware against overflow and underflow
+
+programs boots in bank 0
+bank can go from 0-15 
+
+| `1001` | `BNK`    | B-type  | `PC = val, current_bank = ins_bank, stack += {current_bank, currentPC}` | unaffected |
+side effects: 
+push current bank and PC onto the "stack"
+
+### `BNK` — branch to bank
+```
+1001  BBBB AAAAAAAA
+```
+`current_bank.push{current_bank, PC}`
+`PC = ${AAAAAAAA}` — jump to an address in a bank, current addr and bank is pushed onto the internal stack = ${AAAAAAAA}`
+`current_bank =${BBBB}`
+---
+
+### `BKR` — bank return
+```
+1111  ---------- 11
+```
+`current_bank, PC = current_bank.pop()`
+
+---

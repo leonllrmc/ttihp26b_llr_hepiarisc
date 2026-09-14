@@ -241,10 +241,10 @@ async def test_hepiarisc_cpu(dut):
         0xB000, # B 0, (infloop)
         *[0x0000] * (256-4), # fill
         0x8442, # R2 = 0x42 (fake => if fall on this, PC addr not set properly @ bank jump)  
-        0xF002, # false path return bank switch
+        0xF003, # false path return bank switch
         *[0x0000] * (0x17-2), # fill
         0x8417, # R2 = 0x17 (true path)
-        0xF002, # true path return bank switch
+        0xF003, # true path return bank switch
     ]
     rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
 

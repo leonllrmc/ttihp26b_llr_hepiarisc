@@ -39,8 +39,8 @@ wire is_bra_inst = instruction[15:12] == 4'hB;
 wire is_brcond_inst = instruction[15:12] == 4'hA;
 wire is_bl_inst = instruction[15:12] == 4'hE; // branch link (jsr)
 wire is_br_inst = (instruction[15:12] == 4'hF) && (instruction[1:0] == 2'b00); // branch return (rts)
-wire is_bir_inst = (instruction[15:12] == 4'hF) && instruction[0]; // irq return (rti)
-wire is_bar_inst = (instruction[15:12] == 4'hF) && (instruction[1:0] == 2'b10); // bank return
+wire is_bir_inst = (instruction[15:12] == 4'hF) && (instruction[1:0] == 2'b01); // irq return (rti)
+wire is_bar_inst = (instruction[15:12] == 4'hF) && (instruction[1:0] == 2'b11); // bank return
 wire is_ldmem_inst = instruction[15:12] == 4'hC;
 wire is_stmem_inst = instruction[15:12] == 4'hD;
 wire is_mem_inst = is_ldmem_inst || is_stmem_inst;
