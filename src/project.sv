@@ -365,8 +365,11 @@ wire rst_n = rst_n_ext;
           // systick
           8'h88: hepiarisc_memop_input = {6'h00, IRQ_source_en};// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
           8'h89: hepiarisc_memop_input = systick_divider;
+          default: hepiarisc_memop_input = 8'h00;
         endcase
       end
+    end else begin
+      hepiarisc_memop_input = 8'h00;
     end
   end
 
