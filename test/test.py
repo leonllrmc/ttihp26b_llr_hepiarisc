@@ -1,6 +1,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge, Edge, Timer
+import i2c_device
 
 # ==============================================================================
 # 1. SPI Flash Emulator
@@ -278,7 +279,7 @@ async def test_hepiarisc_cpu(dut):
             hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
 
             if dut.user_project.hepiariscTop.hepiarisc_en.value:
-                if True:
+                if False:
                     dut._log.info(f"Cycle {cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
                     dut._log.info(f"return bank: {dut.user_project.hepiariscTop.cpu.dbg_returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.dbg_bankJumpReturnAddr.value)}")
                     reg_log_str = ""
@@ -394,3 +395,157 @@ async def test_hepiarisc_cpu(dut):
 
 
     await run_test_simple_RAM()
+
+    dummy_program_words = [
+        0x7240,  #R1 = not R1        ; R1 = 0xFF
+        0x9117, # jump to bank 1 0x17
+        0x8038,   #R0 = 0x38
+        0xB000, # B 0, (infloop)
+        *[0x0000] * (256-4), # fill
+        0x8442, # R2 = 0x42 (fake => if fall on this, PC addr not set properly @ bank jump)  
+        0xF003, # false path return bank switch
+        *[0x0000] * (0x17-2), # fill
+        0x8417, # R2 = 0x17 (true path)
+        0x9238, # jump to bank 2 0x38
+        0xF003, # true path return bank switch
+        *[0x0000] * (256 - (0x17+3)), # fill
+        0x8642, # R3 = 0x42 (fake => if fall on this, PC addr not set properly @ bank jump)  
+        0xF003, # false path return bank switch
+        *[0x0000] * ((0x38-2)), # fill
+        0x8638, # R3 = 0x38 (true path)
+        0xF003, # false path return bank switch
+
+    ]
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
+
+    
+    async def run_test_complex_bank_switch_2x():
+        print("Starting simple bank switch test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
+        
+        max_cpu_cycles = 18 # Give it enough cycles to perform SPI transactions
+        current_cpu_cycle = 0
+        while 1:
+            await RisingEdge(dut.clk)
+            
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
+
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                current_cpu_cycle += 1
+                if False:
+                    dut._log.info(f"Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    dut._log.info(f"SP: {int(dut.user_project.hepiariscTop.cpu.bankjmp_SP.value)} current bank: {dut.user_project.hepiariscTop.cpu.currentBank.value} return bank: {dut.user_project.hepiariscTop.cpu.dbg_returnBank.value} return address {hex(dut.user_project.hepiariscTop.cpu.dbg_bankJumpReturnAddr.value)}")
+                    # dut._log.info(f"Stack: bank[0]={dut.user_project.hepiariscTop.cpu.bankJumpReturnAddr[0].value} addr[0]={hex(dut.user_project.hepiariscTop.cpu.bankJumpReturnAddr[0].value)}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
+                    dut._log.info("")
+
+            if current_cpu_cycle >= max_cpu_cycles:
+                await RisingEdge(dut.clk)
+                break
+                
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[1].value == 0xFF)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[0].value == 0x38)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[2].value == 0x17)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[3].value == 0x38)
+
+        dut._log.info("simple bank switch test finished")
+
+    await run_test_complex_bank_switch_2x()
+
+    dummy_program_words = [
+	    0xb010, 0xf001, 0x5000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+	    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+	    0x8090, 0x82a0, 0xd200, 0xc405, 0x5490, 0xa9fe, 0xd201, 0xc405, 
+	    0x5490, 0xa9fe, 0x8238, 0xd201, 0xc405, 0x5490, 0xa9fe, 0xd204, 
+	    0xc405, 0x5490, 0xa9fe, 0xd200, 0xc405, 0x5490, 0xa9fe, 0x82a1, 
+	    0xd201, 0xc405, 0x5490, 0xa9fe, 0xd203, 0xc405, 0x5490, 0xa9fe, 
+	    0xc206, 0xd204, 0xb000
+    ]
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
+
+    
+    async def run_test_simple_I2C():
+        print("Starting simple bank switch test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
+
+        i2c_dev = i2c_device.I2cDevice(sda=dut.I2C_SDA_OUT, sda_o=dut.I2C_SDA_IN,
+                                       scl=dut.I2C_SCL_OUT, scl_o=dut.I2C_SCL_IN)
+
+        
+        max_cpu_cycles = 400 # Give it enough cycles to perform SPI transactions
+        current_cpu_cycle = 0
+        while 1:
+            await RisingEdge(dut.clk)
+            
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
+
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                current_cpu_cycle += 1
+                if False:
+                    dut._log.info(f"Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
+                    dut._log.info("")
+
+            if current_cpu_cycle >= max_cpu_cycles:
+                await RisingEdge(dut.clk)
+                break
+                
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        assert(i2c_dev.addr_match_count == 2)
+        assert(i2c_dev.write_data == 0x38)
+        #assert(i2c_dev.read_count == 1)
+
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[1].value == 0x17)
+        dut._log.info("simple I2C test finished")
+
+    await run_test_simple_I2C()
+# TODO: i2c test, GPI/O/IO

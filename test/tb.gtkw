@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Mon Sep 14 13:49:54 2026
+[*] Fri Sep 18 08:22:56 2026
 [*]
 [dumpfile] "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/tb.fst"
-[dumpfile_mtime] "Mon Sep 14 13:45:01 2026"
-[dumpfile_size] 6495
+[dumpfile_mtime] "Fri Sep 18 08:21:20 2026"
+[dumpfile_size] 14539
 [savefile] "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/tb.gtkw"
-[timestart] 43500000
+[timestart] 0
 [size] 1920 986
-[pos] 720 -1409
-*-21.060863 47780000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 720 0
+*-26.330915 266300000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [treeopen] tb.user_project.
 [treeopen] tb.user_project.hepiariscTop.
@@ -54,7 +54,21 @@ tb.user_project.hepiariscTop.cpu.extmem_rd
 tb.user_project.hepiariscTop.cpu.extmem_wr
 @22
 tb.user_project.hepiariscTop.cpu.extmem_MISO[7:0]
-@23
 tb.user_project.hepiariscTop.cpu.extmem_MOSI[7:0]
+@200
+-
+@22
+tb.user_project.hepiariscTop.i2c_master_phy.din[7:0]
+tb.user_project.hepiariscTop.i2c_master_phy.dout[7:0]
+@28
+tb.user_project.hepiariscTop.i2c_master_phy.busy
+tb.user_project.hepiariscTop.i2c_master_phy.can_advance
+@200
+-
+@28
+tb.user_project.hepiariscTop.I2C_send_pulse
+tb.user_project.hepiariscTop.I2C_start_pulse
+tb.user_project.hepiariscTop.I2C_stop_pulse
+tb.user_project.hepiariscTop.I2C_request_read_pulse
 [pattern_trace] 1
 [pattern_trace] 0

@@ -22,6 +22,13 @@ module tb ();
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
+  
+  wire I2C_SDA_IN;
+  assign uio_in[1] = I2C_SDA_IN; 
+  wire I2C_SCL_IN;
+  assign uio_in[0] = I2C_SCL_IN; 
+  wire I2C_SDA_OUT = ~uio_oe[1];
+  wire I2C_SCL_OUT = ~uio_oe[0];
 
   // Replace tt_um_example with your module name:
   tt_um_llr_hepiarisc user_project (

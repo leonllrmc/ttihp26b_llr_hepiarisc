@@ -1,0 +1,1066 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test'
+rm -f results.xml
+COCOTB_TEST_MODULES=test COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tb TOPLEVEL_LANG=verilog \
+         /usr/bin/vvp -M /home/leonllr/.local/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/rtl/sim.vvp -fst   
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1789721108
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/leonllr/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test.test_hepiarisc_cpu (1/1)
+                                                            Main testbench for the HEPIA RISC-V running from SPI flash.
+Starting simple ALU program test
+     0.00ns INFO     cocotb.tb                          Resetting CPU...
+     0.00ns INFO     cocotb.tb                          SPI Flash Emulator: Online
+   100.00ns INFO     cocotb.tb                          Reset complete.
+   100.00ns INFO     cocotb.tb                          Starting execution loop...
+ 12100.00ns INFO     cocotb.tb                          simple ALU test finished
+Starting simple bank switch test
+ 12100.00ns INFO     cocotb.tb                          Resetting CPU...
+ 12220.00ns INFO     cocotb.tb                          Reset complete.
+ 12220.00ns INFO     cocotb.tb                          Starting execution loop...
+ 28220.00ns INFO     cocotb.tb                          simple bank switch test finished
+Starting simple bank switch test
+ 28220.00ns INFO     cocotb.tb                          Resetting CPU...
+ 28340.00ns INFO     cocotb.tb                          Reset complete.
+ 28340.00ns INFO     cocotb.tb                          Starting execution loop...
+ 70100.00ns INFO     cocotb.tb                          simple bank switch test finished
+Starting simple bank switch test
+ 70100.00ns INFO     cocotb.tb                          Resetting CPU...
+ 70220.00ns INFO     cocotb.tb                          Reset complete.
+ 70220.00ns INFO     cocotb.tb                          Starting execution loop...
+111980.00ns INFO     cocotb.tb                          simple bank switch test finished
+Starting simple bank switch test
+111980.00ns INFO     cocotb.tb                          Resetting CPU...
+112100.00ns INFO     cocotb.tb                          Reset complete.
+112100.00ns INFO     cocotb.tb                          Starting execution loop...
+112100.00ns WARNING  py.warnings                        /mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/i2c_device.py:47: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.sda_o.setimmediatevalue(1)
+112100.00ns WARNING  py.warnings                        /mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/i2c_device.py:49: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.scl_o.setimmediatevalue(1)
+114400.00ns WARNING  py.warnings                        /mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/test.py:526: DeprecationWarning: `int(handle)` casts have been deprecated. Use `int(handle.value)` instead.
+                                                          dut._log.info(f"Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+114400.00ns INFO     cocotb.tb                          Cycle 0001 | bank: 0000 | # PC: 0x0 | uo_out: 0x04 | instruction 0xb010
+114400.00ns INFO     cocotb.tb                          R0 : 0x0 | R1 : 0x0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+116720.00ns INFO     cocotb.tb                          Cycle 0002 | bank: 0000 | # PC: 0x10 | uo_out: 0x04 | instruction 0x8090
+116720.00ns INFO     cocotb.tb                          R0 : 0x0 | R1 : 0x0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+119040.00ns INFO     cocotb.tb                          Cycle 0003 | bank: 0000 | # PC: 0x11 | uo_out: 0x04 | instruction 0x82a0
+119040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+121360.00ns INFO     cocotb.tb                          Cycle 0004 | bank: 0000 | # PC: 0x12 | uo_out: 0x04 | instruction 0xd200
+121360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+123680.00ns INFO     cocotb.tb                          Cycle 0005 | bank: 0000 | # PC: 0x13 | uo_out: 0x04 | instruction 0xc405
+123680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+126000.00ns INFO     cocotb.tb                          Cycle 0006 | bank: 0000 | # PC: 0x14 | uo_out: 0x04 | instruction 0x5490
+126000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+126380.00ns INFO     cocotb.tb.I2C_SDA_OUT              Got start bit
+128320.00ns INFO     cocotb.tb                          Cycle 0007 | bank: 0000 | # PC: 0x15 | uo_out: 0x04 | instruction 0xa9fe
+128320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+130640.00ns INFO     cocotb.tb                          Cycle 0008 | bank: 0000 | # PC: 0x13 | uo_out: 0x04 | instruction 0xc405
+130640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+132960.00ns INFO     cocotb.tb                          Cycle 0009 | bank: 0000 | # PC: 0x14 | uo_out: 0x04 | instruction 0x5490
+132960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+135280.00ns INFO     cocotb.tb                          Cycle 0010 | bank: 0000 | # PC: 0x15 | uo_out: 0x04 | instruction 0xa9fe
+135280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+137600.00ns INFO     cocotb.tb                          Cycle 0011 | bank: 0000 | # PC: 0x13 | uo_out: 0x04 | instruction 0xc405
+137600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+139920.00ns INFO     cocotb.tb                          Cycle 0012 | bank: 0000 | # PC: 0x14 | uo_out: 0x04 | instruction 0x5490
+139920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+142240.00ns INFO     cocotb.tb                          Cycle 0013 | bank: 0000 | # PC: 0x15 | uo_out: 0x04 | instruction 0xa9fe
+142240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+144560.00ns INFO     cocotb.tb                          Cycle 0014 | bank: 0000 | # PC: 0x16 | uo_out: 0x04 | instruction 0xd201
+144560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+146880.00ns INFO     cocotb.tb                          Cycle 0015 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+146880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+149200.00ns INFO     cocotb.tb                          Cycle 0016 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+149200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+151520.00ns INFO     cocotb.tb                          Cycle 0017 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+151520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+153840.00ns INFO     cocotb.tb                          Cycle 0018 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+153840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+156160.00ns INFO     cocotb.tb                          Cycle 0019 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+156160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+158480.00ns INFO     cocotb.tb                          Cycle 0020 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+158480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+160800.00ns INFO     cocotb.tb                          Cycle 0021 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+160800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+163120.00ns INFO     cocotb.tb                          Cycle 0022 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+163120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+165440.00ns INFO     cocotb.tb                          Cycle 0023 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+165440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+167760.00ns INFO     cocotb.tb                          Cycle 0024 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+167760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+170080.00ns INFO     cocotb.tb                          Cycle 0025 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+170080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+172400.00ns INFO     cocotb.tb                          Cycle 0026 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+172400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+174720.00ns INFO     cocotb.tb                          Cycle 0027 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+174720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+177040.00ns INFO     cocotb.tb                          Cycle 0028 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+177040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+179360.00ns INFO     cocotb.tb                          Cycle 0029 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+179360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+181680.00ns INFO     cocotb.tb                          Cycle 0030 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+181680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+184000.00ns INFO     cocotb.tb                          Cycle 0031 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+184000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+186320.00ns INFO     cocotb.tb                          Cycle 0032 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+186320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+188640.00ns INFO     cocotb.tb                          Cycle 0033 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+188640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+190960.00ns INFO     cocotb.tb                          Cycle 0034 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+190960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+193280.00ns INFO     cocotb.tb                          Cycle 0035 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+193280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+195600.00ns INFO     cocotb.tb                          Cycle 0036 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+195600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+197920.00ns INFO     cocotb.tb                          Cycle 0037 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+197920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+200240.00ns INFO     cocotb.tb                          Cycle 0038 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+200240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+202560.00ns INFO     cocotb.tb                          Cycle 0039 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+202560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+204880.00ns INFO     cocotb.tb                          Cycle 0040 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+204880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+207200.00ns INFO     cocotb.tb                          Cycle 0041 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+207200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+209520.00ns INFO     cocotb.tb                          Cycle 0042 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+209520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+211840.00ns INFO     cocotb.tb                          Cycle 0043 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+211840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+214160.00ns INFO     cocotb.tb                          Cycle 0044 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+214160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+216480.00ns INFO     cocotb.tb                          Cycle 0045 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+216480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+218800.00ns INFO     cocotb.tb                          Cycle 0046 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+218800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+Matching address with 0x50
+221120.00ns INFO     cocotb.tb                          Cycle 0047 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+221120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+223440.00ns INFO     cocotb.tb                          Cycle 0048 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+223440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+225760.00ns INFO     cocotb.tb                          Cycle 0049 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+225760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+228080.00ns INFO     cocotb.tb                          Cycle 0050 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+228080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+230400.00ns INFO     cocotb.tb                          Cycle 0051 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+230400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+232720.00ns INFO     cocotb.tb                          Cycle 0052 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+232720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+234580.00ns INFO     cocotb.tb.I2C_SDA_OUT              Address matched (write)
+235040.00ns INFO     cocotb.tb                          Cycle 0053 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+235040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+237360.00ns INFO     cocotb.tb                          Cycle 0054 | bank: 0000 | # PC: 0x17 | uo_out: 0x04 | instruction 0xc405
+237360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+239680.00ns INFO     cocotb.tb                          Cycle 0055 | bank: 0000 | # PC: 0x18 | uo_out: 0x04 | instruction 0x5490
+239680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+242000.00ns INFO     cocotb.tb                          Cycle 0056 | bank: 0000 | # PC: 0x19 | uo_out: 0x04 | instruction 0xa9fe
+242000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+244320.00ns INFO     cocotb.tb                          Cycle 0057 | bank: 0000 | # PC: 0x1a | uo_out: 0x04 | instruction 0x8238
+244320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa0 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+246640.00ns INFO     cocotb.tb                          Cycle 0058 | bank: 0000 | # PC: 0x1b | uo_out: 0x04 | instruction 0xd201
+246640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+248960.00ns INFO     cocotb.tb                          Cycle 0059 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+248960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+251280.00ns INFO     cocotb.tb                          Cycle 0060 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+251280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+253600.00ns INFO     cocotb.tb                          Cycle 0061 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+253600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+255920.00ns INFO     cocotb.tb                          Cycle 0062 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+255920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+258240.00ns INFO     cocotb.tb                          Cycle 0063 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+258240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+260560.00ns INFO     cocotb.tb                          Cycle 0064 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+260560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+262880.00ns INFO     cocotb.tb                          Cycle 0065 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+262880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+265200.00ns INFO     cocotb.tb                          Cycle 0066 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+265200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+267520.00ns INFO     cocotb.tb                          Cycle 0067 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+267520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+269840.00ns INFO     cocotb.tb                          Cycle 0068 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+269840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+272160.00ns INFO     cocotb.tb                          Cycle 0069 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+272160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+274480.00ns INFO     cocotb.tb                          Cycle 0070 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+274480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+276800.00ns INFO     cocotb.tb                          Cycle 0071 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+276800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+279120.00ns INFO     cocotb.tb                          Cycle 0072 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+279120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+281440.00ns INFO     cocotb.tb                          Cycle 0073 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+281440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+283760.00ns INFO     cocotb.tb                          Cycle 0074 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+283760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+286080.00ns INFO     cocotb.tb                          Cycle 0075 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+286080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+288400.00ns INFO     cocotb.tb                          Cycle 0076 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+288400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+290720.00ns INFO     cocotb.tb                          Cycle 0077 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+290720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+293040.00ns INFO     cocotb.tb                          Cycle 0078 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+293040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+295360.00ns INFO     cocotb.tb                          Cycle 0079 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+295360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+297680.00ns INFO     cocotb.tb                          Cycle 0080 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+297680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+300000.00ns INFO     cocotb.tb                          Cycle 0081 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+300000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+302320.00ns INFO     cocotb.tb                          Cycle 0082 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+302320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+304640.00ns INFO     cocotb.tb                          Cycle 0083 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+304640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+306960.00ns INFO     cocotb.tb                          Cycle 0084 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+306960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+309280.00ns INFO     cocotb.tb                          Cycle 0085 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+309280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+311600.00ns INFO     cocotb.tb                          Cycle 0086 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+311600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+313920.00ns INFO     cocotb.tb                          Cycle 0087 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+313920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+316240.00ns INFO     cocotb.tb                          Cycle 0088 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+316240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+318560.00ns INFO     cocotb.tb                          Cycle 0089 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+318560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+320880.00ns INFO     cocotb.tb                          Cycle 0090 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+320880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+323200.00ns INFO     cocotb.tb                          Cycle 0091 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+323200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+325520.00ns INFO     cocotb.tb                          Cycle 0092 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+325520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+327840.00ns INFO     cocotb.tb                          Cycle 0093 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+327840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+330160.00ns INFO     cocotb.tb                          Cycle 0094 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+330160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+332480.00ns INFO     cocotb.tb                          Cycle 0095 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+332480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+334800.00ns INFO     cocotb.tb                          Cycle 0096 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+334800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+Wrote 56
+337120.00ns INFO     cocotb.tb                          Cycle 0097 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+337120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+339440.00ns INFO     cocotb.tb                          Cycle 0098 | bank: 0000 | # PC: 0x1c | uo_out: 0x04 | instruction 0xc405
+339440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+341760.00ns INFO     cocotb.tb                          Cycle 0099 | bank: 0000 | # PC: 0x1d | uo_out: 0x04 | instruction 0x5490
+341760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+344080.00ns INFO     cocotb.tb                          Cycle 0100 | bank: 0000 | # PC: 0x1e | uo_out: 0x04 | instruction 0xa9fe
+344080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+346400.00ns INFO     cocotb.tb                          Cycle 0101 | bank: 0000 | # PC: 0x1f | uo_out: 0x04 | instruction 0xd204
+346400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+348720.00ns INFO     cocotb.tb                          Cycle 0102 | bank: 0000 | # PC: 0x20 | uo_out: 0x04 | instruction 0xc405
+348720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+351040.00ns INFO     cocotb.tb                          Cycle 0103 | bank: 0000 | # PC: 0x21 | uo_out: 0x04 | instruction 0x5490
+351040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+353360.00ns INFO     cocotb.tb                          Cycle 0104 | bank: 0000 | # PC: 0x22 | uo_out: 0x04 | instruction 0xa9fe
+353360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+353920.00ns INFO     cocotb.tb.I2C_SDA_OUT              Got stop bit
+355680.00ns INFO     cocotb.tb                          Cycle 0105 | bank: 0000 | # PC: 0x20 | uo_out: 0x04 | instruction 0xc405
+355680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+358000.00ns INFO     cocotb.tb                          Cycle 0106 | bank: 0000 | # PC: 0x21 | uo_out: 0x04 | instruction 0x5490
+358000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+360320.00ns INFO     cocotb.tb                          Cycle 0107 | bank: 0000 | # PC: 0x22 | uo_out: 0x04 | instruction 0xa9fe
+360320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+362640.00ns INFO     cocotb.tb                          Cycle 0108 | bank: 0000 | # PC: 0x20 | uo_out: 0x04 | instruction 0xc405
+362640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+364960.00ns INFO     cocotb.tb                          Cycle 0109 | bank: 0000 | # PC: 0x21 | uo_out: 0x04 | instruction 0x5490
+364960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+367280.00ns INFO     cocotb.tb                          Cycle 0110 | bank: 0000 | # PC: 0x22 | uo_out: 0x04 | instruction 0xa9fe
+367280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+369600.00ns INFO     cocotb.tb                          Cycle 0111 | bank: 0000 | # PC: 0x23 | uo_out: 0x04 | instruction 0xd200
+369600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+371920.00ns INFO     cocotb.tb                          Cycle 0112 | bank: 0000 | # PC: 0x24 | uo_out: 0x04 | instruction 0xc405
+371920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+374240.00ns INFO     cocotb.tb                          Cycle 0113 | bank: 0000 | # PC: 0x25 | uo_out: 0x04 | instruction 0x5490
+374240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+374620.00ns INFO     cocotb.tb.I2C_SDA_OUT              Got start bit
+376560.00ns INFO     cocotb.tb                          Cycle 0114 | bank: 0000 | # PC: 0x26 | uo_out: 0x04 | instruction 0xa9fe
+376560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+378880.00ns INFO     cocotb.tb                          Cycle 0115 | bank: 0000 | # PC: 0x24 | uo_out: 0x04 | instruction 0xc405
+378880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+381200.00ns INFO     cocotb.tb                          Cycle 0116 | bank: 0000 | # PC: 0x25 | uo_out: 0x04 | instruction 0x5490
+381200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+383520.00ns INFO     cocotb.tb                          Cycle 0117 | bank: 0000 | # PC: 0x26 | uo_out: 0x04 | instruction 0xa9fe
+383520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+385840.00ns INFO     cocotb.tb                          Cycle 0118 | bank: 0000 | # PC: 0x24 | uo_out: 0x04 | instruction 0xc405
+385840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+388160.00ns INFO     cocotb.tb                          Cycle 0119 | bank: 0000 | # PC: 0x25 | uo_out: 0x04 | instruction 0x5490
+388160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+390480.00ns INFO     cocotb.tb                          Cycle 0120 | bank: 0000 | # PC: 0x26 | uo_out: 0x04 | instruction 0xa9fe
+390480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+392800.00ns INFO     cocotb.tb                          Cycle 0121 | bank: 0000 | # PC: 0x27 | uo_out: 0x04 | instruction 0x82a1
+392800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x38 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+395120.00ns INFO     cocotb.tb                          Cycle 0122 | bank: 0000 | # PC: 0x28 | uo_out: 0x04 | instruction 0xd201
+395120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+397440.00ns INFO     cocotb.tb                          Cycle 0123 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+397440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+399760.00ns INFO     cocotb.tb                          Cycle 0124 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+399760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+402080.00ns INFO     cocotb.tb                          Cycle 0125 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+402080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+404400.00ns INFO     cocotb.tb                          Cycle 0126 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+404400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+406720.00ns INFO     cocotb.tb                          Cycle 0127 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+406720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+409040.00ns INFO     cocotb.tb                          Cycle 0128 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+409040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+411360.00ns INFO     cocotb.tb                          Cycle 0129 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+411360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+413680.00ns INFO     cocotb.tb                          Cycle 0130 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+413680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+416000.00ns INFO     cocotb.tb                          Cycle 0131 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+416000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+418320.00ns INFO     cocotb.tb                          Cycle 0132 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+418320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+420640.00ns INFO     cocotb.tb                          Cycle 0133 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+420640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+422960.00ns INFO     cocotb.tb                          Cycle 0134 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+422960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+425280.00ns INFO     cocotb.tb                          Cycle 0135 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+425280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+427600.00ns INFO     cocotb.tb                          Cycle 0136 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+427600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+429920.00ns INFO     cocotb.tb                          Cycle 0137 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+429920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+432240.00ns INFO     cocotb.tb                          Cycle 0138 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+432240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+434560.00ns INFO     cocotb.tb                          Cycle 0139 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+434560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+436880.00ns INFO     cocotb.tb                          Cycle 0140 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+436880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+439200.00ns INFO     cocotb.tb                          Cycle 0141 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+439200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+441520.00ns INFO     cocotb.tb                          Cycle 0142 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+441520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+443840.00ns INFO     cocotb.tb                          Cycle 0143 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+443840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+446160.00ns INFO     cocotb.tb                          Cycle 0144 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+446160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+448480.00ns INFO     cocotb.tb                          Cycle 0145 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+448480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+450800.00ns INFO     cocotb.tb                          Cycle 0146 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+450800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+453120.00ns INFO     cocotb.tb                          Cycle 0147 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+453120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+455440.00ns INFO     cocotb.tb                          Cycle 0148 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+455440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+457760.00ns INFO     cocotb.tb                          Cycle 0149 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+457760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+460080.00ns INFO     cocotb.tb                          Cycle 0150 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+460080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+462400.00ns INFO     cocotb.tb                          Cycle 0151 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+462400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+464720.00ns INFO     cocotb.tb                          Cycle 0152 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+464720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+467040.00ns INFO     cocotb.tb                          Cycle 0153 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+467040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+469360.00ns INFO     cocotb.tb                          Cycle 0154 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+469360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+Matching address with 0x50
+471680.00ns INFO     cocotb.tb                          Cycle 0155 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+471680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+474000.00ns INFO     cocotb.tb                          Cycle 0156 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+474000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+476320.00ns INFO     cocotb.tb                          Cycle 0157 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+476320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+478640.00ns INFO     cocotb.tb                          Cycle 0158 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+478640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+480960.00ns INFO     cocotb.tb                          Cycle 0159 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+480960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+483280.00ns INFO     cocotb.tb                          Cycle 0160 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+483280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+485140.00ns INFO     cocotb.tb.I2C_SDA_OUT              Address matched (read)
+got read
+485600.00ns INFO     cocotb.tb                          Cycle 0161 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+485600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+487920.00ns INFO     cocotb.tb                          Cycle 0162 | bank: 0000 | # PC: 0x29 | uo_out: 0x04 | instruction 0xc405
+487920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+490240.00ns INFO     cocotb.tb                          Cycle 0163 | bank: 0000 | # PC: 0x2a | uo_out: 0x04 | instruction 0x5490
+490240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+492560.00ns INFO     cocotb.tb                          Cycle 0164 | bank: 0000 | # PC: 0x2b | uo_out: 0x04 | instruction 0xa9fe
+492560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+494880.00ns INFO     cocotb.tb                          Cycle 0165 | bank: 0000 | # PC: 0x2c | uo_out: 0x04 | instruction 0xd203
+494880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+497200.00ns INFO     cocotb.tb                          Cycle 0166 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+497200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+499520.00ns INFO     cocotb.tb                          Cycle 0167 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+499520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+501840.00ns INFO     cocotb.tb                          Cycle 0168 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+501840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+504160.00ns INFO     cocotb.tb                          Cycle 0169 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+504160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+506480.00ns INFO     cocotb.tb                          Cycle 0170 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+506480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+508800.00ns INFO     cocotb.tb                          Cycle 0171 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+508800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+511120.00ns INFO     cocotb.tb                          Cycle 0172 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+511120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+513440.00ns INFO     cocotb.tb                          Cycle 0173 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+513440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+515760.00ns INFO     cocotb.tb                          Cycle 0174 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+515760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+518080.00ns INFO     cocotb.tb                          Cycle 0175 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+518080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+520400.00ns INFO     cocotb.tb                          Cycle 0176 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+520400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+522720.00ns INFO     cocotb.tb                          Cycle 0177 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+522720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+525040.00ns INFO     cocotb.tb                          Cycle 0178 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+525040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+527360.00ns INFO     cocotb.tb                          Cycle 0179 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+527360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+529680.00ns INFO     cocotb.tb                          Cycle 0180 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+529680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+532000.00ns INFO     cocotb.tb                          Cycle 0181 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+532000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+534320.00ns INFO     cocotb.tb                          Cycle 0182 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+534320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+536640.00ns INFO     cocotb.tb                          Cycle 0183 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+536640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+538960.00ns INFO     cocotb.tb                          Cycle 0184 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+538960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+541280.00ns INFO     cocotb.tb                          Cycle 0185 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+541280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+543600.00ns INFO     cocotb.tb                          Cycle 0186 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+543600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+545920.00ns INFO     cocotb.tb                          Cycle 0187 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+545920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+548240.00ns INFO     cocotb.tb                          Cycle 0188 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+548240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+550560.00ns INFO     cocotb.tb                          Cycle 0189 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+550560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+552880.00ns INFO     cocotb.tb                          Cycle 0190 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+552880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+555200.00ns INFO     cocotb.tb                          Cycle 0191 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+555200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+557520.00ns INFO     cocotb.tb                          Cycle 0192 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+557520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+559840.00ns INFO     cocotb.tb                          Cycle 0193 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+559840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+562160.00ns INFO     cocotb.tb                          Cycle 0194 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+562160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+564480.00ns INFO     cocotb.tb                          Cycle 0195 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+564480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+566800.00ns INFO     cocotb.tb                          Cycle 0196 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+566800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+569120.00ns INFO     cocotb.tb                          Cycle 0197 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+569120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+571440.00ns INFO     cocotb.tb                          Cycle 0198 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+571440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+573760.00ns INFO     cocotb.tb                          Cycle 0199 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+573760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+576080.00ns INFO     cocotb.tb                          Cycle 0200 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+576080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+578400.00ns INFO     cocotb.tb                          Cycle 0201 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+578400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+got read
+580720.00ns INFO     cocotb.tb                          Cycle 0202 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+580720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+583040.00ns INFO     cocotb.tb                          Cycle 0203 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+583040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+585360.00ns INFO     cocotb.tb                          Cycle 0204 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+585360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+587680.00ns INFO     cocotb.tb                          Cycle 0205 | bank: 0000 | # PC: 0x2d | uo_out: 0x04 | instruction 0xc405
+587680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x1 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+590000.00ns INFO     cocotb.tb                          Cycle 0206 | bank: 0000 | # PC: 0x2e | uo_out: 0x04 | instruction 0x5490
+590000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+592320.00ns INFO     cocotb.tb                          Cycle 0207 | bank: 0000 | # PC: 0x2f | uo_out: 0x04 | instruction 0xa9fe
+592320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+594640.00ns INFO     cocotb.tb                          Cycle 0208 | bank: 0000 | # PC: 0x30 | uo_out: 0x04 | instruction 0xc206
+594640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0xa1 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+596960.00ns INFO     cocotb.tb                          Cycle 0209 | bank: 0000 | # PC: 0x31 | uo_out: 0x04 | instruction 0xd204
+596960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+599280.00ns INFO     cocotb.tb                          Cycle 0210 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+599280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+601600.00ns INFO     cocotb.tb                          Cycle 0211 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+601600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+603920.00ns INFO     cocotb.tb                          Cycle 0212 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+603920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+606240.00ns INFO     cocotb.tb                          Cycle 0213 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+606240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+608560.00ns INFO     cocotb.tb                          Cycle 0214 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+608560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+610880.00ns INFO     cocotb.tb                          Cycle 0215 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+610880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+613200.00ns INFO     cocotb.tb                          Cycle 0216 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+613200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+615520.00ns INFO     cocotb.tb                          Cycle 0217 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+615520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+617840.00ns INFO     cocotb.tb                          Cycle 0218 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+617840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+620160.00ns INFO     cocotb.tb                          Cycle 0219 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+620160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+622480.00ns INFO     cocotb.tb                          Cycle 0220 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+622480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+624800.00ns INFO     cocotb.tb                          Cycle 0221 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+624800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+627120.00ns INFO     cocotb.tb                          Cycle 0222 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+627120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+629440.00ns INFO     cocotb.tb                          Cycle 0223 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+629440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+631760.00ns INFO     cocotb.tb                          Cycle 0224 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+631760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+634080.00ns INFO     cocotb.tb                          Cycle 0225 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+634080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+636400.00ns INFO     cocotb.tb                          Cycle 0226 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+636400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+638720.00ns INFO     cocotb.tb                          Cycle 0227 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+638720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+641040.00ns INFO     cocotb.tb                          Cycle 0228 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+641040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+643360.00ns INFO     cocotb.tb                          Cycle 0229 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+643360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+645680.00ns INFO     cocotb.tb                          Cycle 0230 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+645680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+648000.00ns INFO     cocotb.tb                          Cycle 0231 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+648000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+650320.00ns INFO     cocotb.tb                          Cycle 0232 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+650320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+652640.00ns INFO     cocotb.tb                          Cycle 0233 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+652640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+654960.00ns INFO     cocotb.tb                          Cycle 0234 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+654960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+657280.00ns INFO     cocotb.tb                          Cycle 0235 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+657280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+659600.00ns INFO     cocotb.tb                          Cycle 0236 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+659600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+661920.00ns INFO     cocotb.tb                          Cycle 0237 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+661920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+664240.00ns INFO     cocotb.tb                          Cycle 0238 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+664240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+666560.00ns INFO     cocotb.tb                          Cycle 0239 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+666560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+668880.00ns INFO     cocotb.tb                          Cycle 0240 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+668880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+671200.00ns INFO     cocotb.tb                          Cycle 0241 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+671200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+673520.00ns INFO     cocotb.tb                          Cycle 0242 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+673520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+675840.00ns INFO     cocotb.tb                          Cycle 0243 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+675840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+678160.00ns INFO     cocotb.tb                          Cycle 0244 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+678160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+680480.00ns INFO     cocotb.tb                          Cycle 0245 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+680480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+682800.00ns INFO     cocotb.tb                          Cycle 0246 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+682800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+685120.00ns INFO     cocotb.tb                          Cycle 0247 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+685120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+687440.00ns INFO     cocotb.tb                          Cycle 0248 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+687440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+689760.00ns INFO     cocotb.tb                          Cycle 0249 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+689760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+692080.00ns INFO     cocotb.tb                          Cycle 0250 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+692080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+694400.00ns INFO     cocotb.tb                          Cycle 0251 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+694400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+696720.00ns INFO     cocotb.tb                          Cycle 0252 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+696720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+699040.00ns INFO     cocotb.tb                          Cycle 0253 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+699040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+701360.00ns INFO     cocotb.tb                          Cycle 0254 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+701360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+703680.00ns INFO     cocotb.tb                          Cycle 0255 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+703680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+706000.00ns INFO     cocotb.tb                          Cycle 0256 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+706000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+708320.00ns INFO     cocotb.tb                          Cycle 0257 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+708320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+710640.00ns INFO     cocotb.tb                          Cycle 0258 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+710640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+712960.00ns INFO     cocotb.tb                          Cycle 0259 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+712960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+715280.00ns INFO     cocotb.tb                          Cycle 0260 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+715280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+717600.00ns INFO     cocotb.tb                          Cycle 0261 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+717600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+719920.00ns INFO     cocotb.tb                          Cycle 0262 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+719920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+722240.00ns INFO     cocotb.tb                          Cycle 0263 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+722240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+724560.00ns INFO     cocotb.tb                          Cycle 0264 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+724560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+726880.00ns INFO     cocotb.tb                          Cycle 0265 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+726880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+729200.00ns INFO     cocotb.tb                          Cycle 0266 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+729200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+731520.00ns INFO     cocotb.tb                          Cycle 0267 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+731520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+733840.00ns INFO     cocotb.tb                          Cycle 0268 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+733840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+736160.00ns INFO     cocotb.tb                          Cycle 0269 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+736160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+738480.00ns INFO     cocotb.tb                          Cycle 0270 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+738480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+740800.00ns INFO     cocotb.tb                          Cycle 0271 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+740800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+743120.00ns INFO     cocotb.tb                          Cycle 0272 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+743120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+745440.00ns INFO     cocotb.tb                          Cycle 0273 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+745440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+747760.00ns INFO     cocotb.tb                          Cycle 0274 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+747760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+750080.00ns INFO     cocotb.tb                          Cycle 0275 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+750080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+752400.00ns INFO     cocotb.tb                          Cycle 0276 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+752400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+754720.00ns INFO     cocotb.tb                          Cycle 0277 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+754720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+757040.00ns INFO     cocotb.tb                          Cycle 0278 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+757040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+759360.00ns INFO     cocotb.tb                          Cycle 0279 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+759360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+761680.00ns INFO     cocotb.tb                          Cycle 0280 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+761680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+764000.00ns INFO     cocotb.tb                          Cycle 0281 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+764000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+766320.00ns INFO     cocotb.tb                          Cycle 0282 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+766320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+768640.00ns INFO     cocotb.tb                          Cycle 0283 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+768640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+770960.00ns INFO     cocotb.tb                          Cycle 0284 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+770960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+773280.00ns INFO     cocotb.tb                          Cycle 0285 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+773280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+775600.00ns INFO     cocotb.tb                          Cycle 0286 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+775600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+777920.00ns INFO     cocotb.tb                          Cycle 0287 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+777920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+780240.00ns INFO     cocotb.tb                          Cycle 0288 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+780240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+782560.00ns INFO     cocotb.tb                          Cycle 0289 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+782560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+784880.00ns INFO     cocotb.tb                          Cycle 0290 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+784880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+787200.00ns INFO     cocotb.tb                          Cycle 0291 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+787200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+789520.00ns INFO     cocotb.tb                          Cycle 0292 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+789520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+791840.00ns INFO     cocotb.tb                          Cycle 0293 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+791840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+794160.00ns INFO     cocotb.tb                          Cycle 0294 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+794160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+796480.00ns INFO     cocotb.tb                          Cycle 0295 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+796480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+798800.00ns INFO     cocotb.tb                          Cycle 0296 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+798800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+801120.00ns INFO     cocotb.tb                          Cycle 0297 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+801120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+803440.00ns INFO     cocotb.tb                          Cycle 0298 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+803440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+805760.00ns INFO     cocotb.tb                          Cycle 0299 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+805760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+808080.00ns INFO     cocotb.tb                          Cycle 0300 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+808080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+810400.00ns INFO     cocotb.tb                          Cycle 0301 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+810400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+812720.00ns INFO     cocotb.tb                          Cycle 0302 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+812720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+815040.00ns INFO     cocotb.tb                          Cycle 0303 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+815040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+817360.00ns INFO     cocotb.tb                          Cycle 0304 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+817360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+819680.00ns INFO     cocotb.tb                          Cycle 0305 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+819680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+822000.00ns INFO     cocotb.tb                          Cycle 0306 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+822000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+824320.00ns INFO     cocotb.tb                          Cycle 0307 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+824320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+826640.00ns INFO     cocotb.tb                          Cycle 0308 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+826640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+828960.00ns INFO     cocotb.tb                          Cycle 0309 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+828960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+831280.00ns INFO     cocotb.tb                          Cycle 0310 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+831280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+833600.00ns INFO     cocotb.tb                          Cycle 0311 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+833600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+835920.00ns INFO     cocotb.tb                          Cycle 0312 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+835920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+838240.00ns INFO     cocotb.tb                          Cycle 0313 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+838240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+840560.00ns INFO     cocotb.tb                          Cycle 0314 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+840560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+842880.00ns INFO     cocotb.tb                          Cycle 0315 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+842880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+845200.00ns INFO     cocotb.tb                          Cycle 0316 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+845200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+847520.00ns INFO     cocotb.tb                          Cycle 0317 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+847520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+849840.00ns INFO     cocotb.tb                          Cycle 0318 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+849840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+852160.00ns INFO     cocotb.tb                          Cycle 0319 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+852160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+854480.00ns INFO     cocotb.tb                          Cycle 0320 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+854480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+856800.00ns INFO     cocotb.tb                          Cycle 0321 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+856800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+859120.00ns INFO     cocotb.tb                          Cycle 0322 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+859120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+861440.00ns INFO     cocotb.tb                          Cycle 0323 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+861440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+863760.00ns INFO     cocotb.tb                          Cycle 0324 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+863760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+866080.00ns INFO     cocotb.tb                          Cycle 0325 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+866080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+868400.00ns INFO     cocotb.tb                          Cycle 0326 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+868400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+870720.00ns INFO     cocotb.tb                          Cycle 0327 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+870720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+873040.00ns INFO     cocotb.tb                          Cycle 0328 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+873040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+875360.00ns INFO     cocotb.tb                          Cycle 0329 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+875360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+877680.00ns INFO     cocotb.tb                          Cycle 0330 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+877680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+880000.00ns INFO     cocotb.tb                          Cycle 0331 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+880000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+882320.00ns INFO     cocotb.tb                          Cycle 0332 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+882320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+884640.00ns INFO     cocotb.tb                          Cycle 0333 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+884640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+886960.00ns INFO     cocotb.tb                          Cycle 0334 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+886960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+889280.00ns INFO     cocotb.tb                          Cycle 0335 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+889280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+891600.00ns INFO     cocotb.tb                          Cycle 0336 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+891600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+893920.00ns INFO     cocotb.tb                          Cycle 0337 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+893920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+896240.00ns INFO     cocotb.tb                          Cycle 0338 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+896240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+898560.00ns INFO     cocotb.tb                          Cycle 0339 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+898560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+900880.00ns INFO     cocotb.tb                          Cycle 0340 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+900880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+903200.00ns INFO     cocotb.tb                          Cycle 0341 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+903200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+905520.00ns INFO     cocotb.tb                          Cycle 0342 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+905520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+907840.00ns INFO     cocotb.tb                          Cycle 0343 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+907840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+910160.00ns INFO     cocotb.tb                          Cycle 0344 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+910160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+912480.00ns INFO     cocotb.tb                          Cycle 0345 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+912480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+914800.00ns INFO     cocotb.tb                          Cycle 0346 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+914800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+917120.00ns INFO     cocotb.tb                          Cycle 0347 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+917120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+919440.00ns INFO     cocotb.tb                          Cycle 0348 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+919440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+921760.00ns INFO     cocotb.tb                          Cycle 0349 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+921760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+924080.00ns INFO     cocotb.tb                          Cycle 0350 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+924080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+926400.00ns INFO     cocotb.tb                          Cycle 0351 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+926400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+928720.00ns INFO     cocotb.tb                          Cycle 0352 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+928720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+931040.00ns INFO     cocotb.tb                          Cycle 0353 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+931040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+933360.00ns INFO     cocotb.tb                          Cycle 0354 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+933360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+935680.00ns INFO     cocotb.tb                          Cycle 0355 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+935680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+938000.00ns INFO     cocotb.tb                          Cycle 0356 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+938000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+940320.00ns INFO     cocotb.tb                          Cycle 0357 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+940320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+942640.00ns INFO     cocotb.tb                          Cycle 0358 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+942640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+944960.00ns INFO     cocotb.tb                          Cycle 0359 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+944960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+947280.00ns INFO     cocotb.tb                          Cycle 0360 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+947280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+949600.00ns INFO     cocotb.tb                          Cycle 0361 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+949600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+951920.00ns INFO     cocotb.tb                          Cycle 0362 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+951920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+954240.00ns INFO     cocotb.tb                          Cycle 0363 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+954240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+956560.00ns INFO     cocotb.tb                          Cycle 0364 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+956560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+958880.00ns INFO     cocotb.tb                          Cycle 0365 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+958880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+961200.00ns INFO     cocotb.tb                          Cycle 0366 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+961200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+963520.00ns INFO     cocotb.tb                          Cycle 0367 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+963520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+965840.00ns INFO     cocotb.tb                          Cycle 0368 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+965840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+968160.00ns INFO     cocotb.tb                          Cycle 0369 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+968160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+970480.00ns INFO     cocotb.tb                          Cycle 0370 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+970480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+972800.00ns INFO     cocotb.tb                          Cycle 0371 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+972800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+975120.00ns INFO     cocotb.tb                          Cycle 0372 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+975120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+977440.00ns INFO     cocotb.tb                          Cycle 0373 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+977440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+979760.00ns INFO     cocotb.tb                          Cycle 0374 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+979760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+982080.00ns INFO     cocotb.tb                          Cycle 0375 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+982080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+984400.00ns INFO     cocotb.tb                          Cycle 0376 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+984400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+986720.00ns INFO     cocotb.tb                          Cycle 0377 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+986720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+989040.00ns INFO     cocotb.tb                          Cycle 0378 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+989040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+991360.00ns INFO     cocotb.tb                          Cycle 0379 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+991360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+993680.00ns INFO     cocotb.tb                          Cycle 0380 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+993680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+996000.00ns INFO     cocotb.tb                          Cycle 0381 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+996000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+998320.00ns INFO     cocotb.tb                          Cycle 0382 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+998320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1000640.00ns INFO     cocotb.tb                          Cycle 0383 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1000640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1002960.00ns INFO     cocotb.tb                          Cycle 0384 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1002960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1005280.00ns INFO     cocotb.tb                          Cycle 0385 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1005280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1007600.00ns INFO     cocotb.tb                          Cycle 0386 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1007600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1009920.00ns INFO     cocotb.tb                          Cycle 0387 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1009920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1012240.00ns INFO     cocotb.tb                          Cycle 0388 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1012240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1014560.00ns INFO     cocotb.tb                          Cycle 0389 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1014560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1016880.00ns INFO     cocotb.tb                          Cycle 0390 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1016880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1019200.00ns INFO     cocotb.tb                          Cycle 0391 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1019200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1021520.00ns INFO     cocotb.tb                          Cycle 0392 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1021520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1023840.00ns INFO     cocotb.tb                          Cycle 0393 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1023840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1026160.00ns INFO     cocotb.tb                          Cycle 0394 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1026160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1028480.00ns INFO     cocotb.tb                          Cycle 0395 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1028480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1030800.00ns INFO     cocotb.tb                          Cycle 0396 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1030800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1033120.00ns INFO     cocotb.tb                          Cycle 0397 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1033120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1035440.00ns INFO     cocotb.tb                          Cycle 0398 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1035440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1037760.00ns INFO     cocotb.tb                          Cycle 0399 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1037760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1040080.00ns INFO     cocotb.tb                          Cycle 0400 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1040080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1042400.00ns INFO     cocotb.tb                          Cycle 0401 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1042400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1044720.00ns INFO     cocotb.tb                          Cycle 0402 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1044720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1047040.00ns INFO     cocotb.tb                          Cycle 0403 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1047040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1049360.00ns INFO     cocotb.tb                          Cycle 0404 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1049360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1051680.00ns INFO     cocotb.tb                          Cycle 0405 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1051680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1054000.00ns INFO     cocotb.tb                          Cycle 0406 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1054000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1056320.00ns INFO     cocotb.tb                          Cycle 0407 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1056320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1058640.00ns INFO     cocotb.tb                          Cycle 0408 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1058640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1060960.00ns INFO     cocotb.tb                          Cycle 0409 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1060960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1063280.00ns INFO     cocotb.tb                          Cycle 0410 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1063280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1065600.00ns INFO     cocotb.tb                          Cycle 0411 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1065600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1067920.00ns INFO     cocotb.tb                          Cycle 0412 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1067920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1070240.00ns INFO     cocotb.tb                          Cycle 0413 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1070240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1072560.00ns INFO     cocotb.tb                          Cycle 0414 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1072560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1074880.00ns INFO     cocotb.tb                          Cycle 0415 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1074880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1077200.00ns INFO     cocotb.tb                          Cycle 0416 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1077200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1079520.00ns INFO     cocotb.tb                          Cycle 0417 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1079520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1081840.00ns INFO     cocotb.tb                          Cycle 0418 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1081840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1084160.00ns INFO     cocotb.tb                          Cycle 0419 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1084160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1086480.00ns INFO     cocotb.tb                          Cycle 0420 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1086480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1088800.00ns INFO     cocotb.tb                          Cycle 0421 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1088800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1091120.00ns INFO     cocotb.tb                          Cycle 0422 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1091120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1093440.00ns INFO     cocotb.tb                          Cycle 0423 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1093440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1095760.00ns INFO     cocotb.tb                          Cycle 0424 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1095760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1098080.00ns INFO     cocotb.tb                          Cycle 0425 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1098080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1100400.00ns INFO     cocotb.tb                          Cycle 0426 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1100400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1102720.00ns INFO     cocotb.tb                          Cycle 0427 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1102720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1105040.00ns INFO     cocotb.tb                          Cycle 0428 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1105040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1107360.00ns INFO     cocotb.tb                          Cycle 0429 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1107360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1109680.00ns INFO     cocotb.tb                          Cycle 0430 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1109680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1112000.00ns INFO     cocotb.tb                          Cycle 0431 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1112000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1114320.00ns INFO     cocotb.tb                          Cycle 0432 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1114320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1116640.00ns INFO     cocotb.tb                          Cycle 0433 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1116640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1118960.00ns INFO     cocotb.tb                          Cycle 0434 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1118960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1121280.00ns INFO     cocotb.tb                          Cycle 0435 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1121280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1123600.00ns INFO     cocotb.tb                          Cycle 0436 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1123600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1125920.00ns INFO     cocotb.tb                          Cycle 0437 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1125920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1128240.00ns INFO     cocotb.tb                          Cycle 0438 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1128240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1130560.00ns INFO     cocotb.tb                          Cycle 0439 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1130560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1132880.00ns INFO     cocotb.tb                          Cycle 0440 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1132880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1135200.00ns INFO     cocotb.tb                          Cycle 0441 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1135200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1137520.00ns INFO     cocotb.tb                          Cycle 0442 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1137520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1139840.00ns INFO     cocotb.tb                          Cycle 0443 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1139840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1142160.00ns INFO     cocotb.tb                          Cycle 0444 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1142160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1144480.00ns INFO     cocotb.tb                          Cycle 0445 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1144480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1146800.00ns INFO     cocotb.tb                          Cycle 0446 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1146800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1149120.00ns INFO     cocotb.tb                          Cycle 0447 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1149120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1151440.00ns INFO     cocotb.tb                          Cycle 0448 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1151440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1153760.00ns INFO     cocotb.tb                          Cycle 0449 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1153760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1156080.00ns INFO     cocotb.tb                          Cycle 0450 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1156080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1158400.00ns INFO     cocotb.tb                          Cycle 0451 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1158400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1160720.00ns INFO     cocotb.tb                          Cycle 0452 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1160720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1163040.00ns INFO     cocotb.tb                          Cycle 0453 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1163040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1165360.00ns INFO     cocotb.tb                          Cycle 0454 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1165360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1167680.00ns INFO     cocotb.tb                          Cycle 0455 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1167680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1170000.00ns INFO     cocotb.tb                          Cycle 0456 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1170000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1172320.00ns INFO     cocotb.tb                          Cycle 0457 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1172320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1174640.00ns INFO     cocotb.tb                          Cycle 0458 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1174640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1176960.00ns INFO     cocotb.tb                          Cycle 0459 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1176960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1179280.00ns INFO     cocotb.tb                          Cycle 0460 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1179280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1181600.00ns INFO     cocotb.tb                          Cycle 0461 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1181600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1183920.00ns INFO     cocotb.tb                          Cycle 0462 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1183920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1186240.00ns INFO     cocotb.tb                          Cycle 0463 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1186240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1188560.00ns INFO     cocotb.tb                          Cycle 0464 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1188560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1190880.00ns INFO     cocotb.tb                          Cycle 0465 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1190880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1193200.00ns INFO     cocotb.tb                          Cycle 0466 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1193200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1195520.00ns INFO     cocotb.tb                          Cycle 0467 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1195520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1197840.00ns INFO     cocotb.tb                          Cycle 0468 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1197840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1200160.00ns INFO     cocotb.tb                          Cycle 0469 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1200160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1202480.00ns INFO     cocotb.tb                          Cycle 0470 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1202480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1204800.00ns INFO     cocotb.tb                          Cycle 0471 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1204800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1207120.00ns INFO     cocotb.tb                          Cycle 0472 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1207120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1209440.00ns INFO     cocotb.tb                          Cycle 0473 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1209440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1211760.00ns INFO     cocotb.tb                          Cycle 0474 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1211760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1214080.00ns INFO     cocotb.tb                          Cycle 0475 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1214080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1216400.00ns INFO     cocotb.tb                          Cycle 0476 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1216400.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1218720.00ns INFO     cocotb.tb                          Cycle 0477 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1218720.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1221040.00ns INFO     cocotb.tb                          Cycle 0478 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1221040.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1223360.00ns INFO     cocotb.tb                          Cycle 0479 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1223360.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1225680.00ns INFO     cocotb.tb                          Cycle 0480 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1225680.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1228000.00ns INFO     cocotb.tb                          Cycle 0481 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1228000.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1230320.00ns INFO     cocotb.tb                          Cycle 0482 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1230320.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1232640.00ns INFO     cocotb.tb                          Cycle 0483 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1232640.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1234960.00ns INFO     cocotb.tb                          Cycle 0484 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1234960.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1237280.00ns INFO     cocotb.tb                          Cycle 0485 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1237280.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1239600.00ns INFO     cocotb.tb                          Cycle 0486 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1239600.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1241920.00ns INFO     cocotb.tb                          Cycle 0487 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1241920.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1244240.00ns INFO     cocotb.tb                          Cycle 0488 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1244240.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1246560.00ns INFO     cocotb.tb                          Cycle 0489 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1246560.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1248880.00ns INFO     cocotb.tb                          Cycle 0490 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1248880.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1251200.00ns INFO     cocotb.tb                          Cycle 0491 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1251200.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1253520.00ns INFO     cocotb.tb                          Cycle 0492 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1253520.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1255840.00ns INFO     cocotb.tb                          Cycle 0493 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1255840.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1258160.00ns INFO     cocotb.tb                          Cycle 0494 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1258160.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1260480.00ns INFO     cocotb.tb                          Cycle 0495 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1260480.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1262800.00ns INFO     cocotb.tb                          Cycle 0496 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1262800.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1265120.00ns INFO     cocotb.tb                          Cycle 0497 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1265120.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1267440.00ns INFO     cocotb.tb                          Cycle 0498 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1267440.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1269760.00ns INFO     cocotb.tb                          Cycle 0499 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1269760.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1272080.00ns INFO     cocotb.tb                          Cycle 0500 | bank: 0000 | # PC: 0x32 | uo_out: 0x04 | instruction 0xb000
+1272080.00ns INFO     cocotb.tb                          R0 : 0x90 | R1 : 0x17 | R2 : 0x0 | R3 : 0x0 | R4 : 0x0 | R5 : 0x0 | R6 : 0x0 | R7 : 0x0 | 
+1272100.00ns INFO     cocotb.tb                          simple I2C test finished
+1272100.00ns INFO     cocotb.regression                  test.test_hepiarisc_cpu passed
+1272100.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                         **************************************************************************************
+                                                         ** test.test_hepiarisc_cpu        PASS     1272100.00           8.16     155806.63  **
+                                                         **************************************************************************************
+                                                         ** TESTS=1 PASS=1 FAIL=0 SKIP=0            1272100.00           8.17     155674.59  **
+                                                         **************************************************************************************
+FST info: dumpfile tb.fst opened for output.
+make[1]: Leaving directory '/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test'

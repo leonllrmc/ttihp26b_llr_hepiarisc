@@ -233,7 +233,7 @@ end
 // MARK: bank jump
 integer i_stack_rst;
 wire [7:0] dbg_bankJumpReturnAddr = bankJumpReturnAddr[bankjmp_SP - 3'd1];
-wire [3:0] dbg_returnBank = bankJumpReturnAddr[bankjmp_SP - 3'd1];
+wire [3:0] dbg_returnBank = returnBank[bankjmp_SP - 3'd1];
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
         bankjmp_SP <= 3'h0;
