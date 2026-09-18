@@ -241,7 +241,7 @@ wire rst_n = rst_n_ext;
   // could tie rst_n to reg being written maybe (?)
 
 // 64 bytes of ram for now
-  reg [7:0] RAM_data [95:0];
+  reg [7:0] RAM_data [79:0];
   integer ram_idx;
 
 
@@ -268,7 +268,7 @@ wire rst_n = rst_n_ext;
 
       extflash_spi_cs <= 1'b1;
 
-      for (ram_idx = 0; ram_idx < 96; ram_idx = ram_idx + 1) begin
+      for (ram_idx = 0; ram_idx < 80; ram_idx = ram_idx + 1) begin
         RAM_data[ram_idx] <= 8'h00;
       end
 
@@ -368,7 +368,7 @@ wire rst_n = rst_n_ext;
           currentState <= STATE_SPI_RD;
 
             if(hepiarisc_instruction_memop_wr) begin
-              if(hepiarisc_memop_address < 96) begin
+              if(hepiarisc_memop_address < 80) begin
                 RAM_data[hepiarisc_memop_address[6:0]] <= hepiarisc_memop_output;
               end else begin
                 case(hepiarisc_memop_address)
@@ -447,7 +447,7 @@ wire rst_n = rst_n_ext;
 
   always_comb begin
     if(hepiarisc_instruction_memop_rd) begin
-      if(hepiarisc_memop_address < 96) begin
+      if(hepiarisc_memop_address < 80) begin
         hepiarisc_memop_input = RAM_data[hepiarisc_memop_address[6:0]];
       end else begin
         case(hepiarisc_memop_address)
