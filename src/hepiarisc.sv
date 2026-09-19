@@ -257,7 +257,7 @@ always_ff @(posedge CLK or negedge rst_n) begin
             end else if(is_bankjmp_inst) begin
                 returnBank[bankjmp_SP] <= currentBank;
                 currentBank <= bank_jump_dest_bank;
-                bankJumpReturnAddr[bankjmp_SP] <= next_PC;
+                bankJumpReturnAddr[bankjmp_SP] <= PC + 1;
 
                 bankjmp_SP <= bankjmp_SP + 3'd1;
             end else if(is_bar_inst) begin
@@ -305,8 +305,12 @@ always_comb begin
         next_PC = PC + bra_pc_inc_value;
     end else if(is_bir_inst) begin
         next_PC = IRQ_latched_PC;
-    end else if(irq_sig) begin
-        next_PC = 8'h01;
+    end else if(is_bankjmp_inst) begin
+        next_PC = bank_jump_dest_addr;
+    end else if(is_bar_inst) begin
+        next_PC = bankJumpReturnAddr[bankjmp_SP - 3'd1];
+    /*end else if(irq_sig) begin
+        next_PC = 8'h01;*/
     end else begin
         next_PC = PC + 1;
     end

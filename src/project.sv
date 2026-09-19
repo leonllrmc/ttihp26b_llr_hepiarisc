@@ -260,6 +260,8 @@ wire rst_n = rst_n_ext;
   reg [7:0] user_SPI_MISO;
 
   reg hepiarisc_irq_latched;
+  reg clear_irq_next_cycle;
+
   always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
       currentState <= STATE_SPI_RD;
@@ -288,6 +290,8 @@ wire rst_n = rst_n_ext;
       I2C_set_nak_pulse <= 1'b0;
       I2C_request_read_pulse <= 1'b0;
       I2C_stop_pulse <= 1'b0;
+
+      clear_irq_next_cycle <= 1'b0;
     end else begin
     I2C_start_pulse <= 1'b0;
     I2C_send_pulse <= 1'b0;
@@ -372,13 +376,20 @@ wire rst_n = rst_n_ext;
           extflash_spi_cs <= 1'b1;
 
           if(~hepiarisc_irq) begin
-            hepiarisc_irq_latched <= 1'b0;
+            clear_irq_next_cycle <= 1'b1;
           end
         end
 
 
 
         STATE_MEMOP: begin
+          if((~hepiarisc_irq) && clear_irq_next_cycle) begin
+            clear_irq_next_cycle <= 1'b0;
+            hepiarisc_irq_latched <= 1'b0;
+          end else begin
+            clear_irq_next_cycle <= 1'b0;
+          end
+
           systick_reg_reload <= hepiarisc_instruction_memop_wr && (hepiarisc_memop_address[7:1] == 7'b1000100);
           hepiarisc_en <= 1'b0;
           currentState <= STATE_SPI_RD;
