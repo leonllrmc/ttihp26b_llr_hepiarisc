@@ -210,6 +210,8 @@ wire irq_sig = irq;
 //    end
 //end
 
+wire [3:0] nextBank = is_bankjmp_inst ? bank_jump_dest_bank : (is_bar_inst ? returnBank[bankjmp_SP - 3'd1] : currentBank);
+reg [3:0] IRQ_prev_bank;
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
         IRQ_latched_PC <= 8'h00;
@@ -218,6 +220,8 @@ always_ff @(posedge CLK or negedge rst_n) begin
         irq_latched_flag_carry <= 1'b0;
         irq_latched_flag_zero <= 1'b0;
         irq_latched_flag_negative <= 1'b0;
+
+        IRQ_prev_bank <= 8'h00;
     end else begin
         if(enable && irq_sig) begin
             irq_latched_flag_overflow <= next_alu_flag_overflow;
@@ -225,7 +229,9 @@ always_ff @(posedge CLK or negedge rst_n) begin
             irq_latched_flag_zero <= next_alu_flag_zero;
             irq_latched_flag_negative <= next_alu_flag_negative;
 
-            IRQ_latched_PC <= PC;
+            IRQ_latched_PC <= next_PC;//PC;
+
+            IRQ_prev_bank <= nextBank;
         end
     end
 end
@@ -244,7 +250,11 @@ always_ff @(posedge CLK or negedge rst_n) begin
         end
     end else begin
         if(enable) begin
-            if(is_bankjmp_inst) begin
+            if(irq_sig) begin
+                currentBank <= 4'h0;
+            end else if(is_bir_inst) begin
+                currentBank <= IRQ_prev_bank;
+            end else if(is_bankjmp_inst) begin
                 returnBank[bankjmp_SP] <= currentBank;
                 currentBank <= bank_jump_dest_bank;
                 bankJumpReturnAddr[bankjmp_SP] <= next_PC;

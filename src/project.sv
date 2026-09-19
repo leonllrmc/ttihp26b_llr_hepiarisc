@@ -222,7 +222,7 @@ wire rst_n = rst_n_ext;
     .instruction_in(hepiarisc_instruction),
     .instruction_addr(hepiarisc_addr),
 
-    .irq(hepiarisc_irq),
+    .irq(hepiarisc_irq_latched),
 
     .extmem_MISO(hepiarisc_memop_input),
     .extmem_MOSI(hepiarisc_memop_output),
@@ -259,6 +259,7 @@ wire rst_n = rst_n_ext;
   reg use_user_SPI_flag;
   reg [7:0] user_SPI_MISO;
 
+  reg hepiarisc_irq_latched;
   always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
       currentState <= STATE_SPI_RD;
@@ -280,6 +281,13 @@ wire rst_n = rst_n_ext;
 
       use_user_SPI_flag <= 1'b0;
       user_SPI_MISO <= 8'h00;
+
+      I2C_start_pulse <= 1'b0;
+      I2C_send_pulse <= 1'b0;
+      I2C_set_ack_pulse <= 1'b0;
+      I2C_set_nak_pulse <= 1'b0;
+      I2C_request_read_pulse <= 1'b0;
+      I2C_stop_pulse <= 1'b0;
     end else begin
     I2C_start_pulse <= 1'b0;
     I2C_send_pulse <= 1'b0;
@@ -287,6 +295,10 @@ wire rst_n = rst_n_ext;
     I2C_set_nak_pulse <= 1'b0;
     I2C_request_read_pulse <= 1'b0;
     I2C_stop_pulse <= 1'b0;
+
+    if(hepiarisc_irq) begin
+      hepiarisc_irq_latched <= 1'b1;
+    end
 
     case (currentState)
         STATE_SPI_RD: begin
@@ -358,6 +370,10 @@ wire rst_n = rst_n_ext;
           hepiarisc_en <= 1'b1;
           currentState <= STATE_MEMOP;
           extflash_spi_cs <= 1'b1;
+
+          if(~hepiarisc_irq) begin
+            hepiarisc_irq_latched <= 1'b0;
+          end
         end
 
 
@@ -408,7 +424,7 @@ wire rst_n = rst_n_ext;
 
                   8'h98: begin // SPI write
                     use_user_SPI_flag <= 1'b1;
-                    SPI_DATA_MOSI <= 8'hFF; // dummy data for read
+                    SPI_DATA_MOSI <= hepiarisc_memop_output;
                     SPI_SEND_DATA <= 1'b1;
                     currentState <= STATE_MEMOP_AWAIT_SPI_BUSY;
                   end

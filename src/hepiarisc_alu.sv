@@ -42,7 +42,7 @@ assign flag_carry = (alu_opcode == 3'b000) ? addition_result_ovf[8] :
 
 wire add_sub_overflow = (~(data_A[7] ^ ~(data_B[7])) && (~(data_B[7]) ^ result_out[7]));
 assign flag_overflow = (alu_opcode == 3'b000) ? add_sub_overflow :
-                      (alu_opcode == 3'b001) ? add_sub_overflow :
+                      (alu_opcode == 3'b001) ? ~(data_A[7] ^ data_B[7]) & (data_A[7] ^ result_out[7]) :
                       (alu_opcode == 3'b100) ? ~(data_A[7] ^ data_A[6]) : 1'b0;
 
 endmodule
