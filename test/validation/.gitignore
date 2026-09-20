@@ -1,0 +1,9 @@
+__pycache__/
+build/
+results*/
+results.xml
+*.bin
+*.lst
+*.symbols.json
+*.vcd
+*.fst

@@ -1,0 +1,45 @@
+name: architectural-validation
+on:
+  push:
+    paths: ['src/**', 'test/validation/**', '.github/workflows/validation.yaml']
+  pull_request:
+    paths: ['src/**', 'test/validation/**', '.github/workflows/validation.yaml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [alu, cpu, systick, spi, i2c, soc]
+        spi_div: [4]
+        include:
+          - suite: spi
+            spi_div: 1
+    steps:
+      - uses: actions/checkout@v6
+      # Ubuntu 24.04's default Verilator is older than cocotb 2.0.1's minimum.
+      - uses: YosysHQ/setup-oss-cad-suite@aefa8397bbf8fc6670a0a62af9805a89738f3cde # v3
+        with:
+          version: '2026-09-19'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r test/requirements.txt
+      - name: Validate assembler
+        working-directory: test/validation
+        run: python -m unittest -v test_assembler_host
+      - name: Run independent regression
+        working-directory: test/validation
+        run: python run.py --suite ${{ matrix.suite }} --spi-div ${{ matrix.spi_div }} --protocol --trace instructions --output results
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: validation-${{ matrix.suite }}-spi${{ matrix.spi_div }}
+          path: test/validation/results/
