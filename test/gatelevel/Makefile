@@ -1,7 +1,7 @@
 HERE := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 ROOT := $(abspath $(HERE)/../..)
 MODE ?= $(if $(filter yes,$(GATES)),gl,rtl)
-SIM ?= $(if $(filter gl,$(MODE)),icarus,verilator)
+SIM ?= $(if $(filter gl,$(MODE)),icarus)
 TOPLEVEL_LANG = verilog
 TOPLEVEL = tb_pins
 COCOTB_TEST_MODULES = test_global

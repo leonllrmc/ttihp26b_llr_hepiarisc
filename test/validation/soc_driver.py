@@ -30,9 +30,11 @@ class Monitor:
         if self.soc.trace.level=="cycles":self.soc.trace.event("soc_state",**after)
         if before is not None:
             expected_pulse=0
+            delayed_irq=0
             if before["reload"] or after["reload"]:self.timer_count=0
             elif before["enable"]:
-                expected_pulse=int(self.timer_count>=timer_period(before["divider"])-1)
+                expected_pulse=delayed_irq or int(self.timer_count>=timer_period(before["divider"])-1)
+                delayed_irq=int(self.timer_count>=timer_period(before["divider"])-1)
                 self.timer_count=0 if expected_pulse else self.timer_count+1
             if self.soc.check_timer:
                 assert after["timer_irq"]==expected_pulse,f"MMIO systick: pulse={after['timer_irq']}, expected={expected_pulse}, before={before}, after={after}"
