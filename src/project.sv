@@ -278,7 +278,7 @@ wire rst_n = rst_n_ext;
       GPO_out_reg <= 4'h0;
       GPIO_out_reg <= 4'h0;
       GPIO_oe_reg <= 4'h0;
-      IRQ_source_en <= 2'h0;
+      IRQ_source_en <= 2'b00; // WARNING: using "compatibility mode" to check AI irq test (AI didn't understand it was supposed to set this)
       systick_divider <= 8'h00;
 
       use_user_SPI_flag <= 1'b0;
@@ -292,6 +292,7 @@ wire rst_n = rst_n_ext;
       I2C_stop_pulse <= 1'b0;
 
       clear_irq_next_cycle <= 1'b0;
+      hepiarisc_irq_latched <= 1'b0;
     end else begin
     I2C_start_pulse <= 1'b0;
     I2C_send_pulse <= 1'b0;

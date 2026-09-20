@@ -221,7 +221,7 @@ always_ff @(posedge CLK or negedge rst_n) begin
         irq_latched_flag_zero <= 1'b0;
         irq_latched_flag_negative <= 1'b0;
 
-        IRQ_prev_bank <= 8'h00;
+        IRQ_prev_bank <= 4'h0;
     end else begin
         if(enable && irq_sig) begin
             irq_latched_flag_overflow <= next_alu_flag_overflow;
@@ -257,7 +257,7 @@ always_ff @(posedge CLK or negedge rst_n) begin
             end else if(is_bankjmp_inst) begin
                 returnBank[bankjmp_SP] <= currentBank;
                 currentBank <= bank_jump_dest_bank;
-                bankJumpReturnAddr[bankjmp_SP] <= PC + 1;
+                bankJumpReturnAddr[bankjmp_SP] <= PC + 8'd1;
 
                 bankjmp_SP <= bankjmp_SP + 3'd1;
             end else if(is_bar_inst) begin
@@ -273,7 +273,9 @@ always_ff @(posedge CLK or negedge rst_n) begin
         PC <= 8'h00;
     end else begin
         if(enable) begin
-            if(is_bl_inst) begin
+            if(irq_sig) begin
+                PC <= 8'h01;
+            end else if(is_bl_inst) begin
                 PC <= bl_PC_addr;
             end else if(is_bra_inst) begin
                 PC <= PC + bra_pc_inc_value;
@@ -283,8 +285,6 @@ always_ff @(posedge CLK or negedge rst_n) begin
                 PC <= data_reg_rd_a;
             end else if(is_bir_inst) begin
                 PC <= IRQ_latched_PC;
-            end else if(irq_sig) begin
-                PC <= 8'h01;
             end else if(is_bankjmp_inst) begin
                 PC <= bank_jump_dest_addr;
             end else if(is_bar_inst) begin

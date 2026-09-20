@@ -55,6 +55,7 @@ class CPU:
     irq_bank: int = 0
     irq_flags: tuple = (0, 0, 0, 0)
     memory: list = field(default_factory=lambda: [0] * 256)
+    pending_irq: bool = False
 
     def execute(self, ins, irq=False, read_data=None):
         op, args = ins.mnemonic, ins.args
@@ -84,9 +85,15 @@ class CPU:
             self.bank, next_pc, self.flags = self.irq_bank, self.irq_pc, self.irq_flags
         else: raise ValueError(op)
         self.pc = next_pc
+
+        #if self.pending_irq:
         if irq:
+            self.pending_irq = 0
             self.irq_bank, self.irq_pc, self.irq_flags = self.bank, self.pc, self.flags
             self.bank, self.pc = 0, 1
+        #if irq:
+        #    self.pending_irq = 1
+
 
 
 def timer_period(divider):

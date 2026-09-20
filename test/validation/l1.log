@@ -1,0 +1,795 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation'
+rm -f results.xml
+COCOTB_TEST_MODULES=test_cpu COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tb_cpu TOPLEVEL_LANG=verilog \
+         /mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/build/verilator-cpu/Vtop  --no-timing -Wno-fatal   
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.053 devel
+     0.00ns INFO     cocotb                             Seeding Python random module with 1789889648
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/leonllr/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_cpu.cpu_immediates_registers_and_enable (1/41)
+292864.00ns INFO     cocotb.regression                  test_cpu.cpu_immediates_registers_and_enable passed
+292864.00ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_add (2/41)
+366080.00ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_add passed
+366080.00ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_sub (3/41)
+366223.00ns ERROR    cocotb.tb_cpu                      0:02 sub r0,r0,r0; irq=False, enable=True: CPU actual={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 0, 0), 'sp': 0}, expected={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 1, 0), 'sp': 0}
+                                                        assert not ["CPU actual={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 0, 0), 'sp': 0}, expected={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 1, 0), 'sp': 0}"]; trace: results/cpu_register_decode_sub.jsonl
+366223.00ns WARNING  ..code_sub.cpu_register_decode_sub 0:02 sub r0,r0,r0; irq=False, enable=True: CPU actual={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 0, 0), 'sp': 0}, expected={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 1, 0), 'sp': 0}
+                                                        assert not ["CPU actual={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 0, 0), 'sp': 0}, expected={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 1, 0), 'sp': 0}"]
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 31, in test
+                                                            core=Core(dut,c.trace,p);await core.reset();await core.run_to("done")
+                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 78, in run_to
+                                                            await self.step(**kwargs)
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                            self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                            assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                        AssertionError: 0:02 sub r0,r0,r0; irq=False, enable=True: CPU actual={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 0, 0), 'sp': 0}, expected={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 1, 0), 'sp': 0}
+                                                        assert not ["CPU actual={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 0, 0), 'sp': 0}, expected={'pc': 3, 'bank': 0, 'regs': [0, 0, 0, 0, 0, 0, 0, 0], 'flags': (0, 1, 1, 0), 'sp': 0}"]
+366223.00ns WARNING  cocotb.regression                  test_cpu.cpu_register_decode_sub failed
+366223.00ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_lsl (4/41)
+439439.00ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_lsl passed
+439439.00ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_lsr (5/41)
+512655.00ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_lsr passed
+512655.00ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_asr (6/41)
+585871.01ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_asr passed
+585871.01ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_and (7/41)
+659087.01ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_and passed
+659087.01ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_or (8/41)
+732303.01ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_or passed
+732303.01ns INFO     cocotb.regression                  running test_cpu.cpu_register_decode_not (9/41)
+805519.01ns INFO     cocotb.regression                  test_cpu.cpu_register_decode_not passed
+805519.01ns INFO     cocotb.regression                  running test_cpu.cpu_conditions_decode_and_reserved (10/41)
+918883.01ns INFO     cocotb.regression                  test_cpu.cpu_conditions_decode_and_reserved passed
+918883.01ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bgeu (11/41)
+919089.01ns ERROR    cocotb.tb_cpu                      bgeu: a=0, b=0, flags=(0, 1, 0, 0)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0cc0>(0, 0); trace: results/cpu_compare_bgeu.jsonl
+919089.01ns WARNING  ..pu_compare_bgeu.cpu_compare_bgeu bgeu: a=0, b=0, flags=(0, 1, 0, 0)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0cc0>(0, 0)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: bgeu: a=0, b=0, flags=(0, 1, 0, 0)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0cc0>(0, 0)
+919089.01ns WARNING  cocotb.regression                  test_cpu.cpu_compare_bgeu failed
+919089.01ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bltu (12/41)
+919274.01ns ERROR    cocotb.tb_cpu                      bltu: a=0, b=0, flags=(0, 1, 0, 0)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0d60>(0, 0); trace: results/cpu_compare_bltu.jsonl
+919274.01ns WARNING  ..pu_compare_bltu.cpu_compare_bltu bltu: a=0, b=0, flags=(0, 1, 0, 0)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0d60>(0, 0)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: bltu: a=0, b=0, flags=(0, 1, 0, 0)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0d60>(0, 0)
+919274.01ns WARNING  cocotb.regression                  test_cpu.cpu_compare_bltu failed
+919274.01ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bgtu (13/41)
+919665.01ns ERROR    cocotb.tb_cpu                      bgtu: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0e00>(0, 1); trace: results/cpu_compare_bgtu.jsonl
+919665.01ns WARNING  ..pu_compare_bgtu.cpu_compare_bgtu bgtu: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0e00>(0, 1)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: bgtu: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0e00>(0, 1)
+919665.01ns WARNING  cocotb.regression                  test_cpu.cpu_compare_bgtu failed
+919665.01ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bleu (14/41)
+920056.01ns ERROR    cocotb.tb_cpu                      bleu: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0ea0>(0, 1); trace: results/cpu_compare_bleu.jsonl
+920056.01ns WARNING  ..pu_compare_bleu.cpu_compare_bleu bleu: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0ea0>(0, 1)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: bleu: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0ea0>(0, 1)
+920056.01ns WARNING  cocotb.regression                  test_cpu.cpu_compare_bleu failed
+920056.01ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bge (15/41)
+920426.01ns ERROR    cocotb.tb_cpu                      bge: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0f40>(0, 1); trace: results/cpu_compare_bge.jsonl
+920426.01ns WARNING  .. cpu_compare_bge.cpu_compare_bge bge: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0f40>(0, 1)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: bge: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a0f40>(0, 1)
+920426.01ns WARNING  cocotb.regression                  test_cpu.cpu_compare_bge failed
+920426.01ns INFO     cocotb.regression                  running test_cpu.cpu_compare_blt (16/41)
+920838.02ns ERROR    cocotb.tb_cpu                      blt: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0fe0>(0, 1); trace: results/cpu_compare_blt.jsonl
+920838.02ns WARNING  .. cpu_compare_blt.cpu_compare_blt blt: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0fe0>(0, 1)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: blt: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a0fe0>(0, 1)
+920838.02ns WARNING  cocotb.regression                  test_cpu.cpu_compare_blt failed
+920838.02ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bgt (17/41)
+921229.02ns ERROR    cocotb.tb_cpu                      bgt: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a1080>(0, 1); trace: results/cpu_compare_bgt.jsonl
+921229.02ns WARNING  .. cpu_compare_bgt.cpu_compare_bgt bgt: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a1080>(0, 1)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: bgt: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 1 == 0
+                                                         +  where 0 = int(False)
+                                                         +    where False = <function <lambda> at 0x7c17cf1a1080>(0, 1)
+921229.02ns WARNING  cocotb.regression                  test_cpu.cpu_compare_bgt failed
+921229.02ns INFO     cocotb.regression                  running test_cpu.cpu_compare_ble (18/41)
+921620.02ns ERROR    cocotb.tb_cpu                      ble: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a1120>(0, 1); trace: results/cpu_compare_ble.jsonl
+921620.02ns WARNING  .. cpu_compare_ble.cpu_compare_ble ble: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a1120>(0, 1)
+                                                        Traceback (most recent call last):
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                            await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                            res = await First(timeout_timer, trigger)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                            return completed[0].result()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                            return await trigger
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                            return self.result()
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                            return cast("Outcome[ResultType]", self._outcome).get()
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                            raise self.error
+                                                          File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 83, in test
+                                                            assert core.model.regs[0]==int(predicate(a,b)), f"{name}: a={a}, b={b}, flags={core.model.flags}"
+                                                        AssertionError: ble: a=0, b=1, flags=(1, 0, 1, 1)
+                                                        assert 0 == 1
+                                                         +  where 1 = int(True)
+                                                         +    where True = <function <lambda> at 0x7c17cf1a1120>(0, 1)
+921620.02ns WARNING  cocotb.regression                  test_cpu.cpu_compare_ble failed
+921620.02ns INFO     cocotb.regression                  running test_cpu.cpu_compare_beq (19/41)
+934636.02ns INFO     cocotb.regression                  test_cpu.cpu_compare_beq passed
+934636.02ns INFO     cocotb.regression                  running test_cpu.cpu_compare_bne (20/41)
+946644.02ns INFO     cocotb.regression                  test_cpu.cpu_compare_bne passed
+946644.02ns INFO     cocotb.regression                  running test_cpu.cpu_memory_signed_displacements_aliasing (21/41)
+1065044.02ns INFO     cocotb.regression                  test_cpu.cpu_memory_signed_displacements_aliasing passed
+1065044.02ns INFO     cocotb.regression                  running test_cpu.cpu_pc_wrap_calls_and_flag_preservation (22/41)
+1065540.02ns INFO     cocotb.regression                  test_cpu.cpu_pc_wrap_calls_and_flag_preservation passed
+1065540.02ns INFO     cocotb.regression                  running test_cpu.cpu_bank_all_destinations_and_same_bank (23/41)
+1068836.02ns INFO     cocotb.regression                  test_cpu.cpu_bank_all_destinations_and_same_bank passed
+1068836.02ns INFO     cocotb.regression                  running test_cpu.cpu_bank_stack_eight_frames_and_reuse (24/41)
+1069924.02ns INFO     cocotb.regression                  test_cpu.cpu_bank_stack_eight_frames_and_reuse passed
+1069924.02ns INFO     cocotb.regression                  running test_cpu.cpu_bank_stack_wrap_characterization (25/41)
+1070504.02ns INFO     cocotb.regression                  test_cpu.cpu_bank_stack_wrap_characterization passed
+1070504.02ns INFO     cocotb.regression                  running test_cpu.cpu_irq_add (26/41)
+1070815.02ns INFO     cocotb.regression                  test_cpu.cpu_irq_add passed
+1070815.02ns INFO     cocotb.regression                  running test_cpu.cpu_irq_ldconst (27/41)
+1071126.03ns INFO     cocotb.regression                  test_cpu.cpu_irq_ldconst passed
+1071126.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_load (28/41)
+1071437.03ns INFO     cocotb.regression                  test_cpu.cpu_irq_load passed
+1071437.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_store (29/41)
+1071748.03ns INFO     cocotb.regression                  test_cpu.cpu_irq_store passed
+1071748.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_branch (30/41)
+1071954.03ns ERROR    cocotb.tb_cpu                      0:14 bra destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}"]; trace: results/cpu_irq_branch.jsonl
+1071954.03ns WARNING  ..st cpu_irq_branch.cpu_irq_branch 0:14 bra destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 223, in test
+                                                             await core.step(irq=True)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:14 bra destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+1071954.03ns WARNING  cocotb.regression                  test_cpu.cpu_irq_branch failed
+1071954.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_call (31/41)
+1072160.03ns ERROR    cocotb.tb_cpu                      0:14 bl r7,destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}"]; trace: results/cpu_irq_call.jsonl
+1072160.03ns WARNING  ..b.Test cpu_irq_call.cpu_irq_call 0:14 bl r7,destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 223, in test
+                                                             await core.step(irq=True)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:14 bl r7,destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+1072160.03ns WARNING  cocotb.regression                  test_cpu.cpu_irq_call failed
+1072160.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_return (32/41)
+1072366.03ns ERROR    cocotb.tb_cpu                      0:14 br r7; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}; IRQ saved context=(0, 21, (0, 0, 0, 0)), expected=(0, 96, (0, 0, 0, 0))
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'p...0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}", 'IRQ saved context=(0, 21, (0, 0, 0, 0)), expected=(0, 96, (0, 0, 0, 0))']; trace: results/cpu_irq_return.jsonl
+1072366.03ns WARNING  ..st cpu_irq_return.cpu_irq_return 0:14 br r7; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}; IRQ saved context=(0, 21, (0, 0, 0, 0)), expected=(0, 96, (0, 0, 0, 0))
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'p...0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}", 'IRQ saved context=(0, 21, (0, 0, 0, 0)), expected=(0, 96, (0, 0, 0, 0))']
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 223, in test
+                                                             await core.step(irq=True)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:14 br r7; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}; IRQ saved context=(0, 21, (0, 0, 0, 0)), expected=(0, 96, (0, 0, 0, 0))
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'p...0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}", 'IRQ saved context=(0, 21, (0, 0, 0, 0)), expected=(0, 96, (0, 0, 0, 0))']
+1072366.03ns WARNING  cocotb.regression                  test_cpu.cpu_irq_return failed
+1072366.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_condition_taken (33/41)
+1072572.03ns ERROR    cocotb.tb_cpu                      0:14 bvc destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}"]; trace: results/cpu_irq_condition_taken.jsonl
+1072572.03ns WARNING  ..on_taken.cpu_irq_condition_taken 0:14 bvc destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 223, in test
+                                                             await core.step(irq=True)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:14 bvc destination; irq=True, enable=True: CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 96, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+1072572.03ns WARNING  cocotb.regression                  test_cpu.cpu_irq_condition_taken failed
+1072572.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_condition_not_taken (34/41)
+1072883.03ns INFO     cocotb.regression                  test_cpu.cpu_irq_condition_not_taken passed
+1072883.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_bank_call (35/41)
+1073089.03ns ERROR    cocotb.tb_cpu                      0:14 bnk 2,worker; irq=True, enable=True: CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 1}; hardware stack actual=[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], expected=[(0, 21), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
+                                                         assert not ["CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc..., (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], expected=[(0, 21), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]']; trace: results/cpu_irq_bank_call.jsonl
+1073089.03ns WARNING  .._irq_bank_call.cpu_irq_bank_call 0:14 bnk 2,worker; irq=True, enable=True: CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 1}; hardware stack actual=[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], expected=[(0, 21), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
+                                                         assert not ["CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc..., (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], expected=[(0, 21), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]']
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 223, in test
+                                                             await core.step(irq=True)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:14 bnk 2,worker; irq=True, enable=True: CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 1}; hardware stack actual=[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], expected=[(0, 21), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
+                                                         assert not ["CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 96], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc..., (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], expected=[(0, 21), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]']
+1073089.03ns WARNING  cocotb.regression                  test_cpu.cpu_irq_bank_call failed
+1073089.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_bank_return (36/41)
+1073316.03ns ERROR    cocotb.tb_cpu                      2:40 bkr; irq=True, enable=True: CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}"]; trace: results/cpu_irq_bank_return.jsonl
+1073316.03ns WARNING  .._bank_return.cpu_irq_bank_return 2:40 bkr; irq=True, enable=True: CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 223, in test
+                                                             await core.step(irq=True)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 2:40 bkr; irq=True, enable=True: CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 0, 0, 0, 0, 21], 'flags': (0, 0, 0, 0), 'sp': 0}"]
+1073316.03ns WARNING  cocotb.regression                  test_cpu.cpu_irq_bank_return failed
+1073316.03ns INFO     cocotb.regression                  running test_cpu.cpu_irq_banked_alu (37/41)
+1073669.04ns INFO     cocotb.regression                  test_cpu.cpu_irq_banked_alu passed
+1073669.04ns INFO     cocotb.regression                  running test_cpu.cpu_irq_on_bir (38/41)
+1073980.04ns ERROR    cocotb.tb_cpu                      0:04 bir; irq=True, enable=True: CPU actual={'pc': 65, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}; IRQ saved context=(0, 65, (0, 0, 0, 0)), expected=(2, 65, (1, 0, 0, 0))
+                                                         assert not ["CPU actual={'pc': 65, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}, expected={...1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}", 'IRQ saved context=(0, 65, (0, 0, 0, 0)), expected=(2, 65, (1, 0, 0, 0))']; trace: results/cpu_irq_on_bir.jsonl
+1073980.04ns WARNING  ..st cpu_irq_on_bir.cpu_irq_on_bir 0:04 bir; irq=True, enable=True: CPU actual={'pc': 65, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}; IRQ saved context=(0, 65, (0, 0, 0, 0)), expected=(2, 65, (1, 0, 0, 0))
+                                                         assert not ["CPU actual={'pc': 65, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}, expected={...1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}", 'IRQ saved context=(0, 65, (0, 0, 0, 0)), expected=(2, 65, (1, 0, 0, 0))']
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 249, in cpu_irq_on_bir
+                                                             await core.run_to("irq_return");await core.step(irq=True)
+                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:04 bir; irq=True, enable=True: CPU actual={'pc': 65, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}, expected={'pc': 1, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}; IRQ saved context=(0, 65, (0, 0, 0, 0)), expected=(2, 65, (1, 0, 0, 0))
+                                                         assert not ["CPU actual={'pc': 65, 'bank': 0, 'regs': [32, 1, 128, 129, 1, 1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}, expected={...1, 1, 21], 'flags': (1, 0, 0, 0), 'sp': 1}", 'IRQ saved context=(0, 65, (0, 0, 0, 0)), expected=(2, 65, (1, 0, 0, 0))']
+1073980.04ns WARNING  cocotb.regression                  test_cpu.cpu_irq_on_bir failed
+1073980.04ns INFO     cocotb.regression                  running test_cpu.cpu_seeded_mixed_programs (39/41)
+1074417.04ns ERROR    cocotb.tb_cpu                      0:10 sub r4,r4,r6; irq=False, enable=True: CPU actual={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 1, 1), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 1, 1), 'sp': 0}"]; trace: results/cpu_seeded_mixed_programs.jsonl
+1074417.04ns WARNING  ..ograms.cpu_seeded_mixed_programs 0:10 sub r4,r4,r6; irq=False, enable=True: CPU actual={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 1, 1), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 1, 1), 'sp': 0}"]
+                                                         Traceback (most recent call last):
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/regression.py", line 378, in func
+                                                             await with_timeout(f(*args, **kwargs), timeout, self._test.timeout_unit)
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 411, in with_timeout
+                                                             res = await First(timeout_timer, trigger)
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 203, in _wait
+                                                             return completed[0].result()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_extended_awaitables.py", line 73, in _wait_callback
+                                                             return await trigger
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 493, in __await__
+                                                             return self.result()
+                                                                    ^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/task.py", line 450, in result
+                                                             return cast("Outcome[ResultType]", self._outcome).get()
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/home/leonllr/.local/lib/python3.12/site-packages/cocotb/_outcomes.py", line 51, in get
+                                                             raise self.error
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/test_cpu.py", line 269, in cpu_seeded_mixed_programs
+                                                             core=Core(dut,c.trace,assemble(source));await core.reset();await core.run_to("done")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 78, in run_to
+                                                             await self.step(**kwargs)
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 71, in step
+                                                             self.compare(f"{ins.bank:x}:{ins.pc:02x} {ins.source}; irq={irq}, enable={enable}")
+                                                           File "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation/cpu_driver.py", line 40, in compare
+                                                             assert not mismatches, f"{context}: "+"; ".join(mismatches)
+                                                         AssertionError: 0:10 sub r4,r4,r6; irq=False, enable=True: CPU actual={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 1, 1), 'sp': 0}
+                                                         assert not ["CPU actual={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 0, 0), 'sp': 0}, expected={'pc': 17, 'bank': 0, 'regs': [44, 203, 242, 240, 72, 233, 87, 91], 'flags': (0, 0, 1, 1), 'sp': 0}"]
+1074417.04ns WARNING  cocotb.regression                  test_cpu.cpu_seeded_mixed_programs failed
+1074417.04ns INFO     cocotb.regression                  running test_cpu.cpu_irq_pc_wrap_and_disable_side_effects (40/41)
+1075573.04ns INFO     cocotb.regression                  test_cpu.cpu_irq_pc_wrap_and_disable_side_effects passed
+1075573.04ns INFO     cocotb.regression                  running test_cpu.cpu_reset_with_stack_and_irq_context (41/41)
+1075880.04ns INFO     cocotb.regression                  test_cpu.cpu_reset_with_stack_and_irq_context passed
+1075880.04ns INFO     cocotb.regression                  ***********************************************************************************************************
+                                                         ** TEST                                               STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                         ***********************************************************************************************************
+                                                         ** test_cpu.cpu_immediates_registers_and_enable        PASS      292864.00           8.79      33330.09  **
+                                                         ** test_cpu.cpu_register_decode_add                    PASS       73216.00           2.10      34782.11  **
+                                                         ** test_cpu.cpu_register_decode_sub                    FAIL         143.00           0.01      15538.89  **
+                                                         ** test_cpu.cpu_register_decode_lsl                    PASS       73216.00           2.02      36274.89  **
+                                                         ** test_cpu.cpu_register_decode_lsr                    PASS       73216.00           1.99      36719.96  **
+                                                         ** test_cpu.cpu_register_decode_asr                    PASS       73216.00           2.14      34266.00  **
+                                                         ** test_cpu.cpu_register_decode_and                    PASS       73216.00           2.41      30437.42  **
+                                                         ** test_cpu.cpu_register_decode_or                     PASS       73216.00           0.03    2893610.12  **
+                                                         ** test_cpu.cpu_register_decode_not                    PASS       73216.00           2.54      28827.81  **
+                                                         ** test_cpu.cpu_conditions_decode_and_reserved         PASS      113364.00           2.88      39368.99  **
+                                                         ** test_cpu.cpu_compare_bgeu                           FAIL         206.00           0.01      23180.41  **
+                                                         ** test_cpu.cpu_compare_bltu                           FAIL         185.00           0.01      21351.23  **
+                                                         ** test_cpu.cpu_compare_bgtu                           FAIL         391.00           0.01      27916.81  **
+                                                         ** test_cpu.cpu_compare_bleu                           FAIL         391.00           0.01      30142.13  **
+                                                         ** test_cpu.cpu_compare_bge                            FAIL         370.00           0.01      30106.94  **
+                                                         ** test_cpu.cpu_compare_blt                            FAIL         412.00           0.01      31799.00  **
+                                                         ** test_cpu.cpu_compare_bgt                            FAIL         391.00           0.01      30996.10  **
+                                                         ** test_cpu.cpu_compare_ble                            FAIL         391.00           0.01      33427.90  **
+                                                         ** test_cpu.cpu_compare_beq                            PASS       13016.00           0.34      38412.17  **
+                                                         ** test_cpu.cpu_compare_bne                            PASS       12008.00           0.36      33700.80  **
+                                                         ** test_cpu.cpu_memory_signed_displacements_aliasing   PASS      118400.00           3.18      37264.61  **
+                                                         ** test_cpu.cpu_pc_wrap_calls_and_flag_preservation    PASS         496.00           0.01      51213.01  **
+                                                         ** test_cpu.cpu_bank_all_destinations_and_same_bank    PASS        3296.00           0.08      42264.38  **
+                                                         ** test_cpu.cpu_bank_stack_eight_frames_and_reuse      PASS        1088.00           0.01      95043.17  **
+                                                         ** test_cpu.cpu_bank_stack_wrap_characterization       PASS         580.00           0.01      59122.08  **
+                                                         ** test_cpu.cpu_irq_add                                PASS         311.00           0.01      39491.04  **
+                                                         ** test_cpu.cpu_irq_ldconst                            PASS         311.00           0.01      49976.19  **
+                                                         ** test_cpu.cpu_irq_load                               PASS         311.00           0.01      44222.41  **
+                                                         ** test_cpu.cpu_irq_store                              PASS         311.00           0.01      53366.14  **
+                                                         ** test_cpu.cpu_irq_branch                             FAIL         206.00           0.01      24427.54  **
+                                                         ** test_cpu.cpu_irq_call                               FAIL         206.00           0.01      24930.08  **
+                                                         ** test_cpu.cpu_irq_return                             FAIL         206.00           0.01      22426.52  **
+                                                         ** test_cpu.cpu_irq_condition_taken                    FAIL         206.00           0.01      23408.38  **
+                                                         ** test_cpu.cpu_irq_condition_not_taken                PASS         311.00           0.01      42811.66  **
+                                                         ** test_cpu.cpu_irq_bank_call                          FAIL         206.00           0.01      17786.74  **
+                                                         ** test_cpu.cpu_irq_bank_return                        FAIL         227.00           0.01      20848.45  **
+                                                         ** test_cpu.cpu_irq_banked_alu                         PASS         353.00           0.01      42940.53  **
+                                                         ** test_cpu.cpu_irq_on_bir                             FAIL         311.00           0.01      29466.62  **
+                                                         ** test_cpu.cpu_seeded_mixed_programs                  FAIL         437.00           0.02      29089.67  **
+                                                         ** test_cpu.cpu_irq_pc_wrap_and_disable_side_effects   PASS        1156.00           0.02      46260.12  **
+                                                         ** test_cpu.cpu_reset_with_stack_and_irq_context       PASS         307.00           0.01      42150.36  **
+                                                         ***********************************************************************************************************
+                                                         ** TESTS=41 PASS=24 FAIL=17 SKIP=0                              1075880.04          29.24      36797.73  **
+                                                         ***********************************************************************************************************
+- :0: Verilog $finish
+make[1]: Leaving directory '/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/validation'
