@@ -83,7 +83,7 @@ class I2CPeer:
     Inputs/outputs are resolved in the HDL wrapper: slave drive=1 pulls low.
     SDA changes are driven at falling SCL edges, never sampled-edge races.
     """
-    def __init__(self,dut,trace,address=0x50,read_bytes=(),nack_indices=(),stretch=0,quarter_cycles=None):
+    def __init__(self,dut,trace,address=0x50,read_bytes=(),nack_indices=(),stretch=0,quarter_cycles=None,clock_period_ns=20):
         self.dut,self.trace,self.address=dut,trace,address
         self.read_bytes=list(read_bytes);self.nack_indices=set(nack_indices)
         self.stretch=stretch;self.stretch_remaining=0;self.force_scl_low=False
@@ -94,6 +94,7 @@ class I2CPeer:
         self.tx_index=0;self.tx_byte=self.read_bytes[0] if self.read_bytes else 0xff
         self.stretch_events=0;self.sample_times=[];self.byte_periods=[]
         self.quarter_cycles=quarter_cycles
+        self.clock_period_ns=clock_period_ns
         self.sda_low=0
         dut.slave_scl_low.value=0;dut.slave_sda_low.value=0
 
@@ -144,12 +145,12 @@ class I2CPeer:
                 self.byte_periods.append(periods)
                 self.trace.event("i2c_byte_timing",periods_ns=periods,stretched=bool(self.stretch))
                 if self.quarter_cycles and not self.stretch:
-                    assert all(abs(t-80*self.quarter_cycles)<0.01 for t in periods),f"I2C bit period: {periods}"
+                    assert all(abs(t-4*self.clock_period_ns*self.quarter_cycles)<0.01 for t in periods),f"I2C bit period: {periods}"
             else:raise AssertionError("I2C byte has more than nine sampled bits")
         if self.active and not scl and self.previous_scl:
             if self.quarter_cycles and not self.stretch and self.bits and self.sample_times:
                 high=float(get_sim_time(unit="ns"))-self.sample_times[-1]
-                assert abs(high-40*self.quarter_cycles)<0.01,f"I2C high width {high} ns"
+                assert abs(high-2*self.clock_period_ns*self.quarter_cycles)<0.01,f"I2C high width {high} ns"
             if self.bits==8:
                 self.sda_low=0 if self.read_mode else int(self.ack_this)
             elif self.bits==9:

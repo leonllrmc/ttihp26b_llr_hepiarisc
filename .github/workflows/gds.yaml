@@ -25,17 +25,20 @@ jobs:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@ttihp26b
 
-  #gl_test:
-  #  needs: gds
-  #  runs-on: ubuntu-24.04
-  #  steps:
-  #    - name: checkout repo
-  #      uses: actions/checkout@v6
-  #      with:
-  #        submodules: recursive
-#
-  #    - name: GL test
-  #      uses: TinyTapeout/tt-gds-action/gl_test@ttihp26b
+  gl_test:
+    needs: gds
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Pin-only global regression on the manufactured netlist
+        uses: TinyTapeout/tt-gds-action/gl_test@ttihp26b
+        with:
+          test-dir: test/gatelevel
 
   viewer:
     needs: gds

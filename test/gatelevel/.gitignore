@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+build/
+artifacts/
+results*/
+dist/
+output/
+results.xml
+gate_level_netlist.v
+*.vcd
+*.fst

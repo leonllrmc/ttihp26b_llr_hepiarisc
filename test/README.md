@@ -4,6 +4,10 @@ For architectural and peripheral regression, see [the HEPIARISC validation suite
 It provides an assembler, exhaustive ALU checks, CPU/reference-model tests,
 SPI/I²C peers, interrupt/concurrency tests, and optional execution/protocol logs.
 
+For the smaller **pin-only RTL/gate-level subset**, see
+[the global gate-level tests](gatelevel/README.md). The same 14 firmware scenarios
+run on the production RTL and the IHP standard-cell netlist, without internal probes.
+
 This is a sample testbench for a Tiny Tapeout project. It uses [cocotb](https://docs.cocotb.org/en/stable/) to drive the DUT and check the outputs.
 See below to get started or for more information, check the [website](https://tinytapeout.com/hdl/testing/).
 
