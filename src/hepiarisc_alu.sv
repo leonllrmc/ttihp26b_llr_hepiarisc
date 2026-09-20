@@ -32,7 +32,7 @@ assign flag_zero = (result_out == 8'h00);
 assign flag_negative = result_out[7];
 
 wire [8:0] addition_result_ovf = data_A + data_B;
-wire [8:0] sub_result_ovf = data_A - data_B;
+wire [8:0] sub_result_ovf = {1'b0, data_A} + {1'b0, ~data_B} + 1'b1; //data_A - data_B;
 
 assign flag_carry = (alu_opcode == 3'b000) ? addition_result_ovf[8] :
                     (alu_opcode == 3'b001) ? sub_result_ovf[8] :
@@ -42,8 +42,8 @@ assign flag_carry = (alu_opcode == 3'b000) ? addition_result_ovf[8] :
 
 wire add_sub_overflow =  (~data_A[7] & ~data_B[7] & result_out[7]) | (data_A[7] & data_B[7] & ~result_out[7]);
 // (~(data_A[7] ^ ~(data_B[7])) && (~(data_B[7]) ^ result_out[7]));
-assign flag_overflow = (alu_opcode == 3'b000) ? add_sub_overflow :
-                      (alu_opcode == 3'b001) ? ~(data_A[7] ^ data_B[7]) & (data_A[7] ^ result_out[7]) :
+assign flag_overflow = (alu_opcode == 3'b000) ? (data_A[7] == data_B[7]) && (data_A[7] != result_out[7]) : //add_sub_overflow :
+                      (alu_opcode == 3'b001) ? (data_A[7] != data_B[7]) && (data_A[7] != result_out[7]) : //~(data_A[7] ^ data_B[7]) & (data_A[7] ^ result_out[7]) :
                       (alu_opcode == 3'b100) ? ~(data_A[7] ^ data_A[6]) : 1'b0;
 
 endmodule

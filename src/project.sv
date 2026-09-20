@@ -136,6 +136,8 @@ wire rst_n = rst_n_ext;
   reg [7:0] systick_divider;
   reg systick_reg_reload;
 
+  wire [7:0] systick_counter_out;
+
   systick_gen #(
    .min_div(8)
   ) systick_module (
@@ -143,7 +145,8 @@ wire rst_n = rst_n_ext;
       .rst_n(rst_n && ~systick_reg_reload),
       .divider(systick_divider),
       .en(hepiarisc_en), // clocks during cpu execution
-      .irq_pulse(systick_irq)
+      .irq_pulse(systick_irq),
+      .systick_counter_out(systick_counter_out)
    );
 
   reg irq_ext_old;
@@ -492,6 +495,7 @@ wire rst_n = rst_n_ext;
           8'h96: hepiarisc_memop_input = I2C_RX_data;
           8'h97: hepiarisc_memop_input = {7'h00, I2C_prev_ACK};
           8'h99: hepiarisc_memop_input = user_SPI_MISO;
+          8'h8A: hepiarisc_memop_input = systick_counter_out;
           default: hepiarisc_memop_input = 8'h00;
         endcase
       end

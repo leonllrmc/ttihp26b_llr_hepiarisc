@@ -37,7 +37,8 @@ module tb_systick;
     reg clk, rst_n, en;
     reg [7:0] divider;
     wire irq_pulse;
-    systick_gen #(.min_div(8)) dut(clk,rst_n,divider,en,irq_pulse);
+    wire [7:0] systick_counter_out;
+    systick_gen #(.min_div(8)) dut(clk,rst_n,divider,en,irq_pulse,systick_counter_out);
 endmodule
 
 `ifndef VALIDATION_SPI_DIV

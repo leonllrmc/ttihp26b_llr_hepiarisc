@@ -122,10 +122,10 @@ reg alu_flag_carry;
 reg alu_flag_zero;
 reg alu_flag_negative;
 
-wire next_alu_flag_overflow = is_alu_inst ? flag_overflow : alu_flag_overflow;
-wire next_alu_flag_carry = is_alu_inst ? flag_carry : alu_flag_carry;
-wire next_alu_flag_zero = is_alu_inst ? flag_zero : alu_flag_zero;
-wire next_alu_flag_negative = is_alu_inst ? flag_negative : alu_flag_negative;
+wire next_alu_flag_overflow = is_alu_inst ? flag_overflow : (is_bir_inst ? irq_latched_flag_overflow : alu_flag_overflow);
+wire next_alu_flag_carry = is_alu_inst ? flag_carry : (is_bir_inst ? irq_latched_flag_carry : alu_flag_carry);
+wire next_alu_flag_zero = is_alu_inst ? flag_zero : (is_bir_inst ? irq_latched_flag_zero : alu_flag_zero);
+wire next_alu_flag_negative = is_alu_inst ? flag_negative : (is_bir_inst ? irq_latched_flag_negative : alu_flag_negative);
 
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
@@ -210,7 +210,7 @@ wire irq_sig = irq;
 //    end
 //end
 
-wire [3:0] nextBank = is_bankjmp_inst ? bank_jump_dest_bank : (is_bar_inst ? returnBank[bankjmp_SP - 3'd1] : currentBank);
+wire [3:0] nextBank = is_bankjmp_inst ? bank_jump_dest_bank : (is_bar_inst ? returnBank[bankjmp_SP - 3'd1] : (is_bir_inst ? IRQ_prev_bank : currentBank));
 reg [3:0] IRQ_prev_bank;
 always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
@@ -252,17 +252,24 @@ always_ff @(posedge CLK or negedge rst_n) begin
         if(enable) begin
             if(irq_sig) begin
                 currentBank <= 4'h0;
-            end else if(is_bir_inst) begin
+            end
+            if(is_bir_inst && ~irq_sig) begin
                 currentBank <= IRQ_prev_bank;
             end else if(is_bankjmp_inst) begin
                 returnBank[bankjmp_SP] <= currentBank;
-                currentBank <= bank_jump_dest_bank;
                 bankJumpReturnAddr[bankjmp_SP] <= PC + 8'd1;
 
                 bankjmp_SP <= bankjmp_SP + 3'd1;
+
+                if(~irq_sig) begin
+                    currentBank <= bank_jump_dest_bank;
+                end
             end else if(is_bar_inst) begin
-                currentBank <= returnBank[bankjmp_SP - 3'd1];
                 bankjmp_SP <= bankjmp_SP - 3'd1;
+
+                if(~irq_sig) begin
+                    currentBank <= returnBank[bankjmp_SP - 3'd1];
+                end
             end
         end
     end
@@ -303,6 +310,8 @@ always_comb begin
         next_PC = PC + bra_pc_inc_value;
     end else if (is_brcond_inst && brcond_cond_true) begin
         next_PC = PC + bra_pc_inc_value;
+    end else if(is_br_inst) begin
+        next_PC = data_reg_rd_a;
     end else if(is_bir_inst) begin
         next_PC = IRQ_latched_PC;
     end else if(is_bankjmp_inst) begin
