@@ -17,14 +17,16 @@ module systick_gen #(
       if(~rst_n) begin
          counter <= 0;
          irq_pulse <= 1'b0;
-      end else if(en) begin
+      end else begin
          irq_pulse = 1'b0;
 
+         if(en) begin
             if(counter[counter_width-1:$clog2(min_div)] >= divider) begin
                counter <= 0;
                irq_pulse <= 1'b1;
-            end else 
+            end else
                counter <= counter + 1;
+         end
       end
    end
 

@@ -548,4 +548,126 @@ async def test_hepiarisc_cpu(dut):
         dut._log.info("simple I2C test finished")
 
     await run_test_simple_I2C()
+
+    """
+        #bank rstvec
+        Reset:
+        ; do not change
+        bra $10
+
+        #bank irqvec
+        Irq_Vector:
+        add r7, r7, r1
+        st r7, (r3+1) ; set divider
+        bir ; always add BIR at end
+        nop ; always put nop after to be sure nothing bad happends
+
+        #bank programstart
+        Start:
+        ldconst r7, 0
+        ldconst r1, 1
+
+        ldconst r3, 0x88
+        ldconst r4, 2
+        ldconst r5, 0
+        st r1, (r3+1) ; set divider
+        st r4, (r3+0) ; enable systick as IRQ source
+
+        add_loop:
+        add r5, r5, r1
+        bra add_loop
+    """
+    dummy_program_words = [
+	    0xb010, 0x0fc8, 0xdec1, 0xf001, 0x5000, 0x0000, 0x0000, 0x0000, 
+	    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+	    0x8e01, 0x8201, 0x8688, 0x8802, 0x8a00, 0xd2c1, 0xd8c0, 0x0b48, 
+	    0xb0ff
+    ]
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
+
+    #print(list(zip(dummy_program_words, range(0, 512))))
+
+    async def run_test_simple_systick():
+        print("Starting simple systick test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
+        
+        max_cpu_cycles = 50 # Give it enough cycles to perform SPI transactions
+        current_cpu_cycle = 0
+        while 1:
+            await RisingEdge(dut.clk)
+            
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
+
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
+            
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                current_cpu_cycle += 1
+                if True:
+                    dut._log.info(f"cpu Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    dut._log.info(f"timer_value: {int(dut.user_project.hepiariscTop.systick_module.counter.value)}, apparent ct: {int(dut.user_project.hepiariscTop.systick_module.counter.value)//8}, divider: {int(dut.user_project.hepiariscTop.systick_module.divider.value)}, irq_pulse: {dut.user_project.hepiariscTop.systick_module.irq_pulse.value}, internal_irq: {dut.user_project.hepiariscTop.cpu.irq.value}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
+                    dut._log.info("")
+
+                if current_cpu_cycle == 7:
+                    # reloaded divider = counter should be set to 0
+                    await RisingEdge(dut.clk) # await for state to be MEMOP
+                    assert(dut.user_project.hepiariscTop.systick_module.counter.value == 0x00)
+
+                if current_cpu_cycle == 8:
+                    # reloaded divider = counter should be set to 0
+                    await RisingEdge(dut.clk) # await for state to be MEMOP
+                    assert(dut.user_project.hepiariscTop.systick_module.divider.value == 1)
+
+                if current_cpu_cycle == 8+9:
+                    # reloaded divider = counter should be set to 0
+                    await RisingEdge(dut.clk) # await for state to be MEMOP
+                    assert(dut.user_project.hepiariscTop.systick_module.counter.value == 0x00)
+
+                if current_cpu_cycle == 8+9+3+2:
+                    # reloaded divider = counter should be set to 0
+                    await RisingEdge(dut.clk) # await for state to be MEMOP
+                    assert(dut.user_project.hepiariscTop.systick_module.divider.value == 2)
+
+                if current_cpu_cycle == 8+9+3+2+17+2:
+                    # reloaded divider = counter should be set to 0
+                    await RisingEdge(dut.clk) # await for state to be MEMOP
+                    assert(dut.user_project.hepiariscTop.systick_module.divider.value == 3)
+
+            # irq latency from "timer match" to PC = 1 => seams to be about 3 cycles
+
+            if current_cpu_cycle >= max_cpu_cycles:
+                await RisingEdge(dut.clk)
+                break
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        #assert(dut.user_project.hepiariscTop.cpu.regbank.registers[5].value == 0xAA)
+        #assert(dut.user_project.hepiariscTop.cpu.regbank.registers[6].value == 0x17)
+        #assert(dut.user_project.hepiariscTop.cpu.regbank.registers[7].value == 0x38)
+
+        dut._log.info("simple bank switch test finished")
+
+
+    await run_test_simple_systick()
 # TODO: i2c test, GPI/O/IO

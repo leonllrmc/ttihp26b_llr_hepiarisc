@@ -296,6 +296,7 @@ wire rst_n = rst_n_ext;
 
       clear_irq_next_cycle <= 1'b0;
       hepiarisc_irq_latched <= 1'b0;
+      systick_reg_reload <= 1'b0;
     end else begin
     I2C_start_pulse <= 1'b0;
     I2C_send_pulse <= 1'b0;
@@ -303,6 +304,7 @@ wire rst_n = rst_n_ext;
     I2C_set_nak_pulse <= 1'b0;
     I2C_request_read_pulse <= 1'b0;
     I2C_stop_pulse <= 1'b0;
+    systick_reg_reload <= 1'b0;
 
     if(hepiarisc_irq) begin
       hepiarisc_irq_latched <= 1'b1;

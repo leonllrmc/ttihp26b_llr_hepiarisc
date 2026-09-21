@@ -13,6 +13,7 @@ def firmware(body,handler="bir",extra=""):
 class Monitor:
     def __init__(self,soc):
         self.soc=soc;self.previous=None;self.records=[];self.timer_count=0;self.timer_pulses=0
+        self.expected_pulse=0
 
     def snapshot(self):
         d=self.soc.dut
@@ -29,18 +30,15 @@ class Monitor:
         after=self.snapshot();before=self.previous
         if self.soc.trace.level=="cycles":self.soc.trace.event("soc_state",**after)
         if before is not None:
-            expected_pulse=0
-            delayed_irq=0
-            if before["reload"] or after["reload"]:self.timer_count=0
+            if before["reload"] or after["reload"]:self.timer_count=0;self.expected_pulse=0 # reload = async reset
             elif before["enable"]:
-                expected_pulse=delayed_irq or int(self.timer_count>=timer_period(before["divider"])-1)
-                delayed_irq=int(self.timer_count>=timer_period(before["divider"])-1)
-                self.timer_count=0 if expected_pulse else self.timer_count+1
+                self.expected_pulse=(int(self.timer_count>=timer_period(before["divider"])-1))
+                self.timer_count=0 if self.expected_pulse else self.timer_count+1
             if self.soc.check_timer:
-                assert after["timer_irq"]==expected_pulse,f"MMIO systick: pulse={after['timer_irq']}, expected={expected_pulse}, before={before}, after={after}"
+                assert after["timer_irq"]==self.expected_pulse,f"MMIO systick: pulse={after['timer_irq']}, expected={self.expected_pulse}, before={before}, after={after}"
             self.timer_pulses+=after["timer_irq"]
             if after["timer_irq"] or before["reload"]!=after["reload"]:
-                self.soc.trace.event("timer",pulse=after["timer_irq"],reload=after["reload"],divider=after["divider"],expected_pulse=expected_pulse)
+                self.soc.trace.event("timer",pulse=after["timer_irq"],reload=after["reload"],divider=after["divider"],expected_pulse=self.expected_pulse)
             if before["enable"]:
                 ins=self.soc.program.at(before["bank"],before["pc"])
                 assert ins.word==before["instruction"],f"Fetched instruction mismatch at {before['bank']:x}:{before['pc']:02x}"
