@@ -696,9 +696,9 @@ async def test_hepiarisc_cpu(dut):
 
     async def get_uart_re(uart_si):
         data = await uart_si.read(1)
-        dut._log.info(f"Got from uart {data.decode("ASCII")}")
+        dut._log.info(f"Got from uart {data.decode('ASCII')}")
         data = await uart_si.read(1)
-        dut._log.info(f"Got from uart {data.decode("ASCII")}")
+        dut._log.info(f"Got from uart {data.decode('ASCII')}")
 
 
     async def run_test_simple_UART():
