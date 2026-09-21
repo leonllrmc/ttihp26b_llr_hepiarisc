@@ -93,7 +93,7 @@ module tb_soc;
     wire irq_raw = dut.hepiariscTop.hepiarisc_irq;
     wire irq_external = dut.hepiariscTop.irq_ext_pulse;
     wire systick_irq = dut.hepiariscTop.systick_irq;
-    wire [1:0] irq_sources = dut.hepiariscTop.IRQ_source_en;
+    wire [2:0] irq_sources = dut.hepiariscTop.IRQ_source_en;
     wire [7:0] systick_divider = dut.hepiariscTop.systick_divider;
     wire timer_reload = dut.hepiariscTop.systick_reg_reload;
     wire i2c_busy = dut.hepiariscTop.I2C_busy;

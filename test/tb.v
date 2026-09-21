@@ -30,6 +30,11 @@ module tb ();
   wire I2C_SDA_OUT = ~uio_oe[1];
   wire I2C_SCL_OUT = ~uio_oe[0];
 
+  wire UART_RX_MISO;
+  wire UART_TX_MOSI;
+  assign UART_TX_MOSI = uio_out[3];
+  assign uio_in[2] = UART_RX_MISO;
+
   // Replace tt_um_example with your module name:
   tt_um_llr_hepiarisc user_project (
       .ui_in  (ui_in),    // Dedicated inputs

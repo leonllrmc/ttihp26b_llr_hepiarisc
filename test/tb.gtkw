@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Fri Sep 18 08:22:56 2026
+[*] Mon Sep 21 16:54:44 2026
 [*]
 [dumpfile] "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/tb.fst"
-[dumpfile_mtime] "Fri Sep 18 08:21:20 2026"
-[dumpfile_size] 14539
+[dumpfile_mtime] "Mon Sep 21 16:51:22 2026"
+[dumpfile_size] 29511
 [savefile] "/mnt/c/Users/leonl/Documents/dev/tinytapeout/ttihp26b_llr_hepiarisc/test/tb.gtkw"
-[timestart] 0
+[timestart] 1113090000
 [size] 1920 986
 [pos] 720 0
-*-26.330915 266300000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-24.222820 1147840000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb.
 [treeopen] tb.user_project.
 [treeopen] tb.user_project.hepiariscTop.
@@ -70,5 +70,14 @@ tb.user_project.hepiariscTop.I2C_send_pulse
 tb.user_project.hepiariscTop.I2C_start_pulse
 tb.user_project.hepiariscTop.I2C_stop_pulse
 tb.user_project.hepiariscTop.I2C_request_read_pulse
+@200
+-
+@28
+tb.user_project.hepiariscTop.uart_RX_PHY.uart_rx_en
+tb.user_project.hepiariscTop.uart_RX_PHY.uart_rx_valid
+@22
+tb.user_project.hepiariscTop.uart_RX_PHY.uart_rx_data[7:0]
+@29
+tb.user_project.hepiariscTop.uart_RX_PHY.uart_rxd
 [pattern_trace] 1
 [pattern_trace] 0

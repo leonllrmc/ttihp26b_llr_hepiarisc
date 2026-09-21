@@ -180,6 +180,8 @@ wire rst_n = rst_n_ext;
       3'b011: hepiarisc_irq = irq_ext_pulse || systick_irq;
       3'b100: hepiarisc_irq = UART_RX_got_data;
       3'b101: hepiarisc_irq = UART_got_TX_break;
+      3'b110: hepiarisc_irq = irq_ext_pulse || UART_RX_got_data;
+      3'b111: hepiarisc_irq = systick_irq || UART_RX_got_data;
       default: hepiarisc_irq = 1'b0;
     endcase
   end
@@ -569,7 +571,7 @@ uart_tx uart_TX_PHY (
     end else begin
       if(UART_RX_got_data) begin
           UART_RX_got_data_latched <= 1'b1;
-      end else if(hepiarisc_instruction_memop_rd && (hepiarisc_memop_address == 8'h9C)) begin
+      end else if(hepiarisc_instruction_memop_rd && ((hepiarisc_memop_address == 8'h9D) || (hepiarisc_memop_address == 8'h9C))) begin
           UART_RX_got_data_latched <= 1'b0;
         end
     end
@@ -579,7 +581,7 @@ uart_tx uart_TX_PHY (
 uart_rx uart_RX_PHY (
   .clk(CLK)         , // Top level system clock input.
   .resetn(rst_n)      , // Asynchronous active low reset.
-  .uart_rxd(UART_TX_pin)     , // UART Recieve pin.
+  .uart_rxd(UART_RX_pin)     , // UART Recieve pin.
   .uart_rx_en(1'b1), // Recieve enable
   .uart_rx_break(UART_got_TX_break), // Did we get a BREAK message?
   .uart_rx_valid(UART_RX_got_data), // Valid data recieved and available.

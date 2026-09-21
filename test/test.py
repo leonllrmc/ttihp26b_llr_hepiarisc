@@ -1,6 +1,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge, Edge, Timer
+from uart import UartSource, UartSink
 import i2c_device
 
 # ==============================================================================
@@ -617,7 +618,7 @@ async def test_hepiarisc_cpu(dut):
 
             if dut.user_project.hepiariscTop.hepiarisc_en.value:
                 current_cpu_cycle += 1
-                if True:
+                if False:
                     dut._log.info(f"cpu Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
                     dut._log.info(f"timer_value: {int(dut.user_project.hepiariscTop.systick_module.counter.value)}, apparent ct: {int(dut.user_project.hepiariscTop.systick_module.counter.value)//8}, divider: {int(dut.user_project.hepiariscTop.systick_module.divider.value)}, irq_pulse: {dut.user_project.hepiariscTop.systick_module.irq_pulse.value}, internal_irq: {dut.user_project.hepiariscTop.cpu.irq.value}")
                     reg_log_str = ""
@@ -670,4 +671,116 @@ async def test_hepiarisc_cpu(dut):
 
 
     await run_test_simple_systick()
+
+    dummy_program_words = [
+        0xb010, 0xcd41, 0xcd40, 0xddc0, 0x0fc8, 0xf001, 0x5000, 0x0000, 
+	    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+	    0x8088, 0x8201, 0x8404, 0x8a9c, 0x8e00, 0xd400, 0x8402, 0x19d0, 
+	    0xa9ff, 0x8800, 0xd800, 0x8473, 0xd57e, 0xc57f, 0x5490, 0xa9fe, 
+	    0x8474, 0xd57e, 0xc57f, 0x5490, 0xa9fe, 0xcbc0, 0xc9ff, 0xb000
+    ]
+    rom_bytes["content"] = ins_array_to_bytearray(dummy_program_words)
+
+    #print(list(zip(dummy_program_words, range(0, 512))))
+
+    # MARK: see customasm_uart_1.s
+
+    async def send_uart_te(uart_src):
+        await uart_src.write('t'.encode('ASCII'))
+        # wait for operation to complete (optional)
+        await uart_src.wait()
+        await uart_src.write('e'.encode('ASCII'))
+        # wait for operation to complete (optional)
+        await uart_src.wait()
+        dut._log.info("Finished sending UART data")
+
+    async def get_uart_re(uart_si):
+        data = await uart_si.read(1)
+        dut._log.info(f"Got from uart {data.decode("ASCII")}")
+        data = await uart_si.read(1)
+        dut._log.info(f"Got from uart {data.decode("ASCII")}")
+
+
+    async def run_test_simple_UART():
+        return None
+        uart_source = UartSource(dut.UART_RX_MISO, baud=115200, bits=8)
+        uart_sink = UartSink(dut.UART_TX_MOSI, baud=115200, bits=8)
+
+        print("Starting simple UART test")
+        # 4. Reset the CPU (this triggers the CPU to start its first SPI read)
+        await reset_cpu(dut)
+
+        # 5. Let the CPU run and monitor state
+        dut._log.info("Starting execution loop...")
+        
+        max_cpu_cycles = 200 # Give it enough cycles to perform SPI transactions
+        current_cpu_cycle = 0
+        cocotb.start_soon(get_uart_re(uart_sink))
+        while 1:
+            await RisingEdge(dut.clk)
+            
+            uo_out_val = int(dut.uo_out.value) if dut.uo_out.value.is_resolvable else 0
+
+            current_ins = dut.user_project.hepiariscTop.cpu.instruction_in
+            # Reaching into the Verilog hierarchy to peek at the Program Counter (Optional)
+            # ---> UPDATE THIS PATH to match your actual internal module names <---
+            try:
+                #print(dir(dut.user_project.hepiariscTop.cpu.PC.value))
+                pc_val = dut.user_project.hepiariscTop.cpu.PC.value
+                #pc_val = "Not Mapped"
+            except AttributeError:
+                pc_val = "Path Error"
+
+            hp_bank = dut.user_project.hepiariscTop.cpu.currentBank.value
+            
+
+            if dut.user_project.hepiariscTop.hepiarisc_en.value:
+                current_cpu_cycle += 1
+                if False:
+                    dut._log.info(f"cpu Cycle {current_cpu_cycle:04d} | bank: {hp_bank} | # PC: {hex(int(pc_val))} | uo_out: 0x{uo_out_val:02X} | instruction {hex(int(current_ins))}")
+                    dut._log.info(f"timer_value: {int(dut.user_project.hepiariscTop.systick_module.counter.value)}, apparent ct: {int(dut.user_project.hepiariscTop.systick_module.counter.value)//8}, divider: {int(dut.user_project.hepiariscTop.systick_module.divider.value)}, irq_pulse: {dut.user_project.hepiariscTop.systick_module.irq_pulse.value}, internal_irq: {dut.user_project.hepiariscTop.cpu.irq.value}")
+                    reg_log_str = ""
+                    for i in range(8):
+                        reg_log_str += f"R{i} : {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[i].value)} | "
+                    dut._log.info(reg_log_str)
+                    dut._log.info("")
+
+                if current_cpu_cycle == 7:
+                    # reloaded divider = counter should be set to 0
+                    await RisingEdge(dut.clk) # await for state to be MEMOP
+                    cocotb.start_soon(send_uart_te(uart_source))
+
+                if int(pc_val) == 4:
+                    # reloaded divider = counter should be set to 0
+                    #await RisingEdge(dut.clk) # await for state to be MEMOP
+                    dut._log.info("UART RX trap")
+                    dut._log.info(f"RX data reg: {hex(dut.user_project.hepiariscTop.UART_RX_data.value)}")
+                    dut._log.info(f"R6: {hex(dut.user_project.hepiariscTop.cpu.regbank.registers[6].value)}")
+
+                if int(pc_val) == 19: # after RX wait loop
+                    # reloaded divider = counter should be set to 0
+                    dut._log.info("Should have recieved 2 bytes via UART")
+                #    await RisingEdge(dut.clk) # await for state to be MEMOP
+                #    cocotb.start_soon(get_uart_re(uart_sink))
+
+
+            # irq latency from "timer match" to PC = 1 => seams to be about 3 cycles
+
+            if current_cpu_cycle >= max_cpu_cycles:
+                await RisingEdge(dut.clk)
+                break
+                
+            # Optional: Break condition
+            # If your RISC-V program writes 0xFF to specific output pins when finished
+            # if (uo_out_val & 0xF0) == 0xF0:  
+            #     dut._log.info("Program signaled completion.")
+            #     break
+        #assert(dut.user_project.hepiariscTop.cpu.regbank.registers[5].value == 0xAA)
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[4].value == ord('t'))
+        assert(dut.user_project.hepiariscTop.cpu.regbank.registers[5].value == ord('e'))
+
+        dut._log.info("simple UART test finished")
+
+
+    await run_test_simple_UART()
 # TODO: i2c test, GPI/O/IO
