@@ -19,8 +19,10 @@ module tt_um_llr_hepiarisc (
 
   // All output pins must be assigned. If not used, assign to 0.
   //assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out[3:2] = 0;
-  assign uio_oe[3:2]  = 0;
+  assign uio_out[3] = 0;
+  assign uio_oe[3]  = 0;
+
+  assign uio_oe[2]  = 1;
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, 1'b0, ui_in[3:2]};
@@ -71,6 +73,8 @@ module tt_um_llr_hepiarisc (
   .I2C_sda_in(uio_in[1]),
   .I2C_sda_oe(I2C_sda_oe),
 
+  .UART_TX_pin(uio_out[2]),
+  .UART_RX_pin(uio_in[1]),
 
   .irq_ext(ui_in[1]),
 
@@ -113,7 +117,10 @@ module hepiarisc_top (
   input I2C_scl_in,
   output I2C_scl_oe,
   input I2C_sda_in,
-  output I2C_sda_oe
+  output I2C_sda_oe,
+
+  output UART_TX_pin,
+  input UART_RX_pin
 );
 
 wire rst_n = rst_n_ext;
@@ -132,7 +139,7 @@ wire rst_n = rst_n_ext;
   
   reg hepiarisc_en;
   wire systick_irq;
-  reg [1:0] IRQ_source_en; // IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+  reg [2:0] IRQ_source_en; // IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
   reg [7:0] systick_divider;
   reg systick_reg_reload;
 
@@ -167,10 +174,12 @@ wire rst_n = rst_n_ext;
   reg hepiarisc_irq;
   always_comb begin
     case(IRQ_source_en)
-      2'b00: hepiarisc_irq = 1'b0;
-      2'b01: hepiarisc_irq = irq_ext_pulse;
-      2'b10: hepiarisc_irq = systick_irq;
-      2'b11: hepiarisc_irq = irq_ext_pulse || systick_irq;
+      3'b000: hepiarisc_irq = 1'b0;
+      3'b001: hepiarisc_irq = irq_ext_pulse;
+      3'b010: hepiarisc_irq = systick_irq;
+      3'b011: hepiarisc_irq = irq_ext_pulse || systick_irq;
+      3'b100: hepiarisc_irq = UART_RX_got_data;
+      3'b101: hepiarisc_irq = UART_got_TX_break;
     endcase
   end
     
@@ -265,6 +274,18 @@ wire rst_n = rst_n_ext;
   reg hepiarisc_irq_latched;
   reg clear_irq_next_cycle;
 
+  wire UART_TX_busy;
+  reg UART_TX_SEND;
+  reg [7:0] UART_TX_out;
+
+  wire UART_got_TX_break;
+wire UART_RX_got_data;
+wire [7:0] UART_RX_data;
+
+reg UART_RX_got_data_latched;
+
+
+
   always_ff @(posedge CLK or negedge rst_n) begin
     if(~rst_n) begin
       currentState <= STATE_SPI_RD;
@@ -281,7 +302,7 @@ wire rst_n = rst_n_ext;
       GPO_out_reg <= 4'h0;
       GPIO_out_reg <= 4'h0;
       GPIO_oe_reg <= 4'h0;
-      IRQ_source_en <= 2'b00; // WARNING: using "compatibility mode" to check AI irq test (AI didn't understand it was supposed to set this)
+      IRQ_source_en <= 3'b000; // WARNING: using "compatibility mode" to check AI irq test (AI didn't understand it was supposed to set this)
       systick_divider <= 8'h00;
 
       use_user_SPI_flag <= 1'b0;
@@ -297,6 +318,9 @@ wire rst_n = rst_n_ext;
       clear_irq_next_cycle <= 1'b0;
       hepiarisc_irq_latched <= 1'b0;
       systick_reg_reload <= 1'b0;
+
+      UART_TX_SEND <= 1'b0;
+      UART_TX_out <= 8'h00;
     end else begin
     I2C_start_pulse <= 1'b0;
     I2C_send_pulse <= 1'b0;
@@ -305,6 +329,7 @@ wire rst_n = rst_n_ext;
     I2C_request_read_pulse <= 1'b0;
     I2C_stop_pulse <= 1'b0;
     systick_reg_reload <= 1'b0;
+    UART_TX_SEND <= 1'b0;
 
     if(hepiarisc_irq) begin
       hepiarisc_irq_latched <= 1'b1;
@@ -412,7 +437,7 @@ wire rst_n = rst_n_ext;
                   // 8'h84: GPIO_in_reg <= hepiarisc_memop_output[3:0]; -> undefined
                   8'h87: reg_rgb[2:0] <= hepiarisc_memop_output[2:0];
                   // systick
-                  8'h88: IRQ_source_en <= hepiarisc_memop_output[1:0];// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+                  8'h88: IRQ_source_en <= hepiarisc_memop_output[2:0];// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
                   8'h89: systick_divider <= hepiarisc_memop_output;
 
 
@@ -444,6 +469,11 @@ wire rst_n = rst_n_ext;
                     SPI_DATA_MOSI <= hepiarisc_memop_output;
                     SPI_SEND_DATA <= 1'b1;
                     currentState <= STATE_MEMOP_AWAIT_SPI_BUSY;
+                  end
+
+                  8'h9A: begin // UART TX
+                    UART_TX_SEND <= 1'b1;
+                    UART_TX_out <= hepiarisc_memop_output;
                   end
                 endcase
               end
@@ -491,13 +521,16 @@ wire rst_n = rst_n_ext;
           8'h84: hepiarisc_memop_input = {4'h0, GPIO_in_reg};
           8'h87: hepiarisc_memop_input = {5'h00, reg_rgb[2:0]};
           // systick
-          8'h88: hepiarisc_memop_input = {6'h00, IRQ_source_en};// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
+          8'h88: hepiarisc_memop_input = {5'h00, IRQ_source_en};// IRQ source = 00: none, 01: ext, 10: systick, 11: systick|| ext
           8'h89: hepiarisc_memop_input = systick_divider;
           8'h95: hepiarisc_memop_input = {7'h00, I2C_busy};
           8'h96: hepiarisc_memop_input = I2C_RX_data;
           8'h97: hepiarisc_memop_input = {7'h00, I2C_prev_ACK};
           8'h99: hepiarisc_memop_input = user_SPI_MISO;
           8'h8A: hepiarisc_memop_input = systick_counter_out;
+          8'h9B: hepiarisc_memop_input = {7'h00, UART_TX_busy};
+          8'h9C: hepiarisc_memop_input = UART_RX_data;
+          8'h9D: hepiarisc_memop_input = {7'h00, UART_RX_got_data_latched};
           default: hepiarisc_memop_input = 8'h00;
         endcase
       end
@@ -516,6 +549,41 @@ wire rst_n = rst_n_ext;
   assign DEBUG_OUT = {SPI_SEND_DATA_PULSE, reg_rgb};//dbg_state};//{CLK, rst_n, hepiarisc_en, SPI_DONE};
 
 
+// NOTE: UART designed for 50MHz operation, for 100 MHz use 230'400 as baudrate (need testing)
+
+uart_tx uart_TX_PHY (
+  .clk(CLK)         , // Top level system clock input.
+  .resetn(rst_n)      , // Asynchronous active low reset.
+  .uart_txd(UART_TX_pin)    , // UART transmit pin.
+  .uart_tx_busy(UART_TX_busy), // Module busy sending previous item.
+  .uart_tx_en(UART_TX_SEND)  , // Send the data on uart_tx_data
+  .uart_tx_data(UART_TX_out)  // The data to be sent
+);
+
+
+
+  always_ff @(posedge CLK or negedge rst_n) begin
+    if(~rst_n) begin
+      UART_RX_got_data_latched <= 1'b0;
+    end else begin
+      if(UART_RX_got_data) begin
+          UART_RX_got_data_latched <= 1'b1;
+      end else if(hepiarisc_instruction_memop_rd && (hepiarisc_memop_address == 8'h9C)) begin
+          UART_RX_got_data_latched <= 1'b0;
+        end
+    end
+  end
+
+
+uart_rx uart_RX_PHY (
+  .clk(CLK)         , // Top level system clock input.
+  .resetn(rst_n)      , // Asynchronous active low reset.
+  .uart_rxd(UART_TX_pin)     , // UART Recieve pin.
+  .uart_rx_en(1'b1), // Recieve enable
+  .uart_rx_break(UART_got_TX_break), // Did we get a BREAK message?
+  .uart_rx_valid(UART_RX_got_data), // Valid data recieved and available.
+  .uart_rx_data(UART_RX_data)   // The recieved data.
+);
 
 i2c_master #(
   // 50 MHz / 100 KHz / 4 
