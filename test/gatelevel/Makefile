@@ -28,7 +28,7 @@ ifeq ($(MODE),gl)
   VERILOG_SOURCES += $(GL_NETLIST)
 else ifeq ($(MODE),rtl)
   VERILOG_SOURCES = $(ROOT)/test/validation/sim_config.sv
-  VERILOG_SOURCES += $(addprefix $(ROOT)/src/,project.sv hepiarisc.sv hepiarisc_alu.sv hepiarisc_regbank.sv spi_master.v systick_gen.sv i2c_master.v)
+  VERILOG_SOURCES += $(addprefix $(ROOT)/src/,project.sv hepiarisc.sv hepiarisc_alu.sv hepiarisc_regbank.sv spi_master.v systick_gen.sv i2c_master.v uart_rx.v uart_tx.v)
 else
   $(error MODE must be rtl or gl)
 endif

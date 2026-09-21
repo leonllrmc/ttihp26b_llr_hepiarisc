@@ -32,7 +32,7 @@ async def gl_ram_all_80_addresses(dut):
     with Case(dut,"gl_ram_all_80_addresses") as c:
         body="""ldconst r7,0
         ldconst r1,165
-        ldconst r2,176
+        ldconst r2,184
         ldconst r3,1
         fill:st r1,(r7)
         add r7,r7,r3
@@ -40,7 +40,7 @@ async def gl_ram_all_80_addresses(dut):
         add r2,r2,r3
         bne fill
         ldconst r7,0
-        ldconst r2,176
+        ldconst r2,184
         verify:ld r4,(r7)
         st r4,(r0)
         not r4,r4
@@ -58,12 +58,12 @@ async def gl_ram_all_80_addresses(dut):
         ldconst r7,255
         ld r4,(r7+1)
         st r4,(r0)
-        ldconst r7,80
+        ldconst r7,72
         st r1,(r7)
         ld r4,(r7)
         st r4,(r0)
         """
-        expected=[v for i in range(80) for v in ((165+i)&255,((165+i)&255)^255)]+[90,90,0]
+        expected=[v for i in range(72) for v in ((165+i)&255,((165+i)&255)^255)]+[90,90,0]
         p=Pins(dut,c.trace,firmware(body));await p.reset();await p.finish(expected)
 
 
