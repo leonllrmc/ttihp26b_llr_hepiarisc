@@ -180,6 +180,7 @@ wire rst_n = rst_n_ext;
       3'b011: hepiarisc_irq = irq_ext_pulse || systick_irq;
       3'b100: hepiarisc_irq = UART_RX_got_data;
       3'b101: hepiarisc_irq = UART_got_TX_break;
+      default: hepiarisc_irq = 1'b0;
     endcase
   end
     
