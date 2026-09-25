@@ -54,15 +54,26 @@ unexport WAVES
 
 TB_VCD := $(HERE)/tb.vcd
 FORCE_VCD_V := $(SIM_BUILD)/force_vcd_dump.v
+# Written immediately at parse time (not as a make rule/target) so this
+# can't accidentally become the default make goal. mkdir/printf produce
+# no stdout, so this expands to nothing in the makefile text.
+$(shell mkdir -p $(SIM_BUILD))
+$(shell printf '%s\n' \
+	'module force_vcd_dump();' \
+	'  initial begin' \
+	'    $$dumpfile("$(TB_VCD)");' \
+	'    $$dumpvars(0, $(TOPLEVEL));' \
+	'  end' \
+	'endmodule' \
+	> $(FORCE_VCD_V))
 VERILOG_SOURCES += $(FORCE_VCD_V)
-
-$(FORCE_VCD_V):
-	@mkdir -p $(SIM_BUILD)
-	@echo 'module force_vcd_dump();'        >  $@
-	@echo '  initial begin'                  >> $@
-	@echo '    $$dumpfile("$(TB_VCD)");'     >> $@
-	@echo '    $$dumpvars(0, $(TOPLEVEL));'  >> $@
-	@echo '  end'                            >> $@
-	@echo 'endmodule'                        >> $@
+ifeq ($(SIM),icarus)
+  # Icarus only auto-roots uninstantiated modules when NO -s flag is
+  # given at all. Cocotb's Makefile.icarus already passes "-s
+  # $(TOPLEVEL)", which switches Icarus into explicit-root-list mode -
+  # so without this, force_vcd_dump is silently never elaborated and
+  # never runs. Adding it as a second explicit root fixes that.
+  COMPILE_ARGS += -s force_vcd_dump
+endif
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
