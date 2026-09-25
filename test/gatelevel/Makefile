@@ -38,4 +38,28 @@ ifeq ($(SIM),verilator)
 else ifeq ($(SIM),icarus)
   COMPILE_ARGS += -g2012
 endif
+
+# --- VCD export -------------------------------------------------------
+# Generates a small, never-instantiated Verilog stub that dumps the whole
+# TOPLEVEL hierarchy. Icarus elaborates uninstantiated modules as extra
+# roots, so this works regardless of whether tb_pins.sv already has its
+# own $dumpfile/$dumpvars block. The VCD is written into HEPIA_OUTPUT so
+# it ends up wherever your CI already collects build artifacts from.
+VCD ?= 1
+ifeq ($(VCD),1)
+  VCD_FILE := $(HEPIA_OUTPUT)/waveform-$(MODE)-$(SIM).vcd
+  VCD_DUMP_V := $(SIM_BUILD)/tt_vcd_dump.v
+  VERILOG_SOURCES += $(VCD_DUMP_V)
+
+$(VCD_DUMP_V):
+	@mkdir -p $(SIM_BUILD) $(HEPIA_OUTPUT)
+	@echo 'module tt_vcd_dump();'              >  $@
+	@echo '  initial begin'                     >> $@
+	@echo '    $$dumpfile("$(VCD_FILE)");'      >> $@
+	@echo '    $$dumpvars(0, $(TOPLEVEL));'     >> $@
+	@echo '  end'                               >> $@
+	@echo 'endmodule'                           >> $@
+endif
+# ------------------------------------------------------------------------
+
 include $(shell cocotb-config --makefiles)/Makefile.sim
