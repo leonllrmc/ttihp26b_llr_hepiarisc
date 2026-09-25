@@ -39,6 +39,13 @@ jobs:
         uses: TinyTapeout/tt-gds-action/gl_test@ttihp26b
         with:
           test-dir: test/gatelevel
+      - name: Fall back to VCD if only FST was produced
+        if: always()
+        run: |
+          cd test/gatelevel
+          if [ ! -s tb.vcd ] && [ -f tb.fst ] && command -v fst2vcd >/dev/null; then
+            fst2vcd tb.fst -o tb.vcd
+          fi
 
   viewer:
     needs: gds

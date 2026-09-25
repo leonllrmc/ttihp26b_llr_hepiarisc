@@ -39,27 +39,30 @@ else ifeq ($(SIM),icarus)
   COMPILE_ARGS += -g2012
 endif
 
-# --- VCD export -------------------------------------------------------
-# Generates a small, never-instantiated Verilog stub that dumps the whole
-# TOPLEVEL hierarchy. Icarus elaborates uninstantiated modules as extra
-# roots, so this works regardless of whether tb_pins.sv already has its
-# own $dumpfile/$dumpvars block. The VCD is written into HEPIA_OUTPUT so
-# it ends up wherever your CI already collects build artifacts from.
-VCD ?= 1
-ifeq ($(VCD),1)
-  VCD_FILE := $(HEPIA_OUTPUT)/waveform-$(MODE)-$(SIM).vcd
-  VCD_DUMP_V := $(SIM_BUILD)/tt_vcd_dump.v
-  VERILOG_SOURCES += $(VCD_DUMP_V)
+# --- Force a real tb.vcd no matter what ---------------------------------
+# The CI's artifact-upload step looks for a literal "tb.vcd" right here
+# in test/gatelevel/. Two defenses, unconditional, independent of
+# pass/fail:
+#  1. Neutralize WAVES so nothing (cocotb's own icarus WAVES handling,
+#     or a WAVES env var set by the CI) puts Icarus into -fst mode,
+#     which silently redirects $dumpfile("tb.vcd") into tb.fst.
+#  2. Inject our own never-instantiated dump module, so a VCD gets
+#     written even if tb_pins.sv has no dump code of its own. Icarus
+#     elaborates uninstantiated modules as extra roots.
+override WAVES :=
+unexport WAVES
 
-$(VCD_DUMP_V):
-	@mkdir -p $(SIM_BUILD) $(HEPIA_OUTPUT)
-	@echo 'module tt_vcd_dump();'              >  $@
-	@echo '  initial begin'                     >> $@
-	@echo '    $$dumpfile("$(VCD_FILE)");'      >> $@
-	@echo '    $$dumpvars(0, $(TOPLEVEL));'     >> $@
-	@echo '  end'                               >> $@
-	@echo 'endmodule'                           >> $@
-endif
-# ------------------------------------------------------------------------
+TB_VCD := $(HERE)/tb.vcd
+FORCE_VCD_V := $(SIM_BUILD)/force_vcd_dump.v
+VERILOG_SOURCES += $(FORCE_VCD_V)
+
+$(FORCE_VCD_V):
+	@mkdir -p $(SIM_BUILD)
+	@echo 'module force_vcd_dump();'        >  $@
+	@echo '  initial begin'                  >> $@
+	@echo '    $$dumpfile("$(TB_VCD)");'     >> $@
+	@echo '    $$dumpvars(0, $(TOPLEVEL));'  >> $@
+	@echo '  end'                            >> $@
+	@echo 'endmodule'                        >> $@
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
